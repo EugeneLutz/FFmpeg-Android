@@ -70,17 +70,6 @@ public class AVFilter extends CStructWrapper
 		super(pointer, allocType, 0);
 	}
 
-	@Override
-	protected void finalize() /*throws Throwable*/
-	{
-		switch (allocationType)
-		{
-			case FROM_INSTANCE: break;
-			//case CREATE: freeNative(pointer);
-			default: break;
-		}
-	}
-
 
 
 	public static AVFilter from(long pointer)

@@ -10,17 +10,10 @@ public class AVDeviceInfoList extends CStructWrapper
 	}
 
 	@Override
-	protected void finalize() /*throws Throwable*/
+	protected void finalizeCustom(int flag)
 	{
-		switch (allocationType)
-		{
-			case FROM_INSTANCE: break;
-			case CUSTOM: freeNative(pointer); break;
-			default: break;
-		}
+		freeNative(pointer);
 	}
-
-
 
 	public static AVDeviceInfoList from(long pointer)
 	{

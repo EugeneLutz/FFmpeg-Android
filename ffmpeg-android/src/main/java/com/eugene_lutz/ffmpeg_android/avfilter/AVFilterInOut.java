@@ -40,7 +40,7 @@ public class AVFilterInOut extends CStructWrapper
 
 	private void customFinalize()
 	{
-		switch (allocationFlag)
+		switch (customFlag)
 		{
 			case 0: break;
 			case 1: break;

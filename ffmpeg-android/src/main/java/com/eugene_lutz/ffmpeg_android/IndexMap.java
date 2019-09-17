@@ -1,5 +1,12 @@
 package com.eugene_lutz.ffmpeg_android;
 
+import java.util.AbstractCollection;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Enumeration;
+import java.util.List;
+
 public class IndexMap<type>
 {
 	private final type value;
@@ -11,7 +18,7 @@ public class IndexMap<type>
 		this.index = index;
 	}
 
-	public static <type> type getValueByIndex(IndexMap<type>[] map, long index)
+	public static <type> type getValueByIndex(ArrayList<IndexMap<type>> map, long index)
 	{
 		for (IndexMap<type> currentPair : map)
 		{
@@ -21,10 +28,10 @@ public class IndexMap<type>
 			}
 		}
 
-		return map[map.length - 1].value;
+		return map.get(map.size() - 1).value;
 	}
 
-	public static <type> long getIndexByValue(IndexMap<type>[] map, type value)
+	public static <type> long getIndexByValue(ArrayList<IndexMap<type>> map, type value)
 	{
 		for (IndexMap<type> currentPair : map)
 		{
@@ -34,6 +41,6 @@ public class IndexMap<type>
 			}
 		}
 
-		return map[map.length - 1].index;
+		return map.get(map.size() - 1).index;
 	}
 }

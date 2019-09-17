@@ -1,5 +1,8 @@
 package com.eugene_lutz.ffmpeg_android;
 
+/**
+ * Wrapper over <b>void*</b> pointer
+ */
 public final class OpaqueIterator
 {
 	private final long pointer;

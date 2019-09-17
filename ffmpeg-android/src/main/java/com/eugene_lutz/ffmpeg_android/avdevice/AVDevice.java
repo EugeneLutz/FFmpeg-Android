@@ -1,12 +1,18 @@
 package com.eugene_lutz.ffmpeg_android.avdevice;
 
 import com.eugene_lutz.ffmpeg_android.CStructWrapper;
+import com.eugene_lutz.ffmpeg_android.FFmpegAndroid;
 import com.eugene_lutz.ffmpeg_android.avformat.AVFormatContext;
 import com.eugene_lutz.ffmpeg_android.avformat.AVInputFormat;
 import com.eugene_lutz.ffmpeg_android.avformat.AVOutputFormat;
 
 public class AVDevice
 {
+	static {
+		FFmpegAndroid.loadLibraries();
+	}
+
+
 	//region Static methods
 
 	//region Other

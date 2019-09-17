@@ -15,15 +15,15 @@ public class AVBufferRef extends CStructWrapper
 	}
 
 	@Override
-	protected void finalize() /*throws Throwable*/
+	protected void finalizeDefault()
 	{
-		switch (allocationType)
-		{
-			case FROM_INSTANCE: break;
-			case ALLOC: freeNative(pointer); break;
-			case CUSTOM: unrefNative(pointer); break;
-			default: break;
-		}
+		freeNative(pointer);
+	}
+
+	@Override
+	protected void finalizeCustom(int flag)
+	{
+		unrefNative(pointer);
 	}
 
 	private static AVBufferRef from(long pointer, AllocationType allocType)

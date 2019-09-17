@@ -7,8 +7,15 @@ public class FFmpegAndroid
 		loadLibraries();
 	}
 
-	private static void loadLibraries()
+	private static boolean loaded = false;
+
+	public static void loadLibraries()
 	{
+		if (loaded)
+		{
+			return;
+		}
+
 		System.loadLibrary("avutil");
 		System.loadLibrary("swresample");
 		System.loadLibrary("avcodec");

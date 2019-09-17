@@ -26,14 +26,9 @@ public class AVFilterContext extends CStructWrapper
 	}
 
 	@Override
-	protected void finalize() /*throws Throwable*/
+	protected void finalizeDefault()
 	{
-		switch (allocationType)
-		{
-			case FROM_INSTANCE: break;
-			case ALLOC: freeNative(pointer);
-			default: break;
-		}
+		freeNative(pointer);
 	}
 
 	public static AVFilterContext from(long pointer)

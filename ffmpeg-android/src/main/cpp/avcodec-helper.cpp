@@ -248,7 +248,7 @@ static std::vector<IndexMap<AVCodecID>> codecMap {
     { AV_CODEC_ID_ARBC, 236 },
     { AV_CODEC_ID_AGM, 237 },
     { AV_CODEC_ID_LSCR, 238 },
-    { AV_CODEC_ID_FIRST_AUDIO, 239 },
+    //{ AV_CODEC_ID_FIRST_AUDIO, 239 },
     { AV_CODEC_ID_PCM_S16LE, 240 },
     { AV_CODEC_ID_PCM_S16BE, 241 },
     { AV_CODEC_ID_PCM_U16LE, 242 },
@@ -427,7 +427,7 @@ static std::vector<IndexMap<AVCodecID>> codecMap {
     { AV_CODEC_ID_SBC, 415 },
     { AV_CODEC_ID_ATRAC9, 416 },
     { AV_CODEC_ID_HCOM, 417 },
-    { AV_CODEC_ID_FIRST_SUBTITLE, 418 },
+    //{ AV_CODEC_ID_FIRST_SUBTITLE, 418 },
     { AV_CODEC_ID_DVD_SUBTITLE, 419 },
     { AV_CODEC_ID_DVB_SUBTITLE, 420 },
     { AV_CODEC_ID_TEXT, 421 },
@@ -454,7 +454,7 @@ static std::vector<IndexMap<AVCodecID>> codecMap {
     { AV_CODEC_ID_HDMV_TEXT_SUBTITLE, 442 },
     { AV_CODEC_ID_TTML, 443 },
     { AV_CODEC_ID_ARIB_CAPTION, 444 },
-    { AV_CODEC_ID_FIRST_UNKNOWN, 445 },
+    //{ AV_CODEC_ID_FIRST_UNKNOWN, 445 },
     { AV_CODEC_ID_TTF, 446 },
     { AV_CODEC_ID_SCTE_35, 447 },
     { AV_CODEC_ID_BINTEXT, 448 },
@@ -477,7 +477,7 @@ long AVCodecIDToLong(AVCodecID codec)
     return IndexMap<AVCodecID>::GetIndexByValue(codecMap, codec);
 }
 
-AVCodecID longToAVCodecID(long value)
+AVCodecID longToAVCodecID(long index)
 {
-    return IndexMap<AVCodecID>::GetValueByIndex(codecMap, value);
+    return IndexMap<AVCodecID>::GetValueByIndex(codecMap, index);
 }

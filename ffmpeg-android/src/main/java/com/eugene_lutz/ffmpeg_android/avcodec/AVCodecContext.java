@@ -11,14 +11,9 @@ public class AVCodecContext extends CStructWrapper
 	}
 
 	@Override
-	protected void finalize() /*throws Throwable*/
+	protected void finalizeDefault()
 	{
-		switch (allocationType)
-		{
-			case FROM_INSTANCE: break;
-			case ALLOC: free(pointer); break;
-			default: break;
-		}
+		freeNative(pointer);
 	}
 
 	public static AVCodecContext from(long pointer)
@@ -33,7 +28,7 @@ public class AVCodecContext extends CStructWrapper
 
 	public static AVCodecContext create(AVCodec codec)
 	{
-		final long contextPointer = alloc3(codec.getPointer());
+		final long contextPointer = alloc3Native(codec.getPointer());
 		return from(contextPointer, AllocationType.ALLOC, 0);
 	}
 
@@ -146,11 +141,24 @@ public class AVCodecContext extends CStructWrapper
 	}
 
 
+	/**
+	 * Get codec of this context.
+	 * @return Codec of this context.
+	 */
+	public AVCodec getCodec()
+	{
+		final long codecPointer = getCodecNative(pointer);
+		return AVCodec.from(codecPointer);
+	}
 
-	private static native void free(long pointer);
-	private static native long alloc3(long codecPointer);
+
+
+	private static native void freeNative(long pointer);
+	private static native long alloc3Native(long codecPointer);
 
 	private static native int fillFromParametersNative(long pointer, long parameters);
 	private static native int sendPacketNative(long pointer, long packetPointer);
 	private static native int sendFrameNative(long pointer, long framePointer);
+
+	private static native long getCodecNative(long pointer);
 }

@@ -72,7 +72,7 @@ public class AVIOContext extends CStructWrapper
 	{
 		closeNative(pointer);
 
-		switch (allocationFlag)
+		switch (customFlag)
 		{
 			case 0: break;
 			case 1: break;

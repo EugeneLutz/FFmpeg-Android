@@ -11,28 +11,6 @@ public class AVDeviceRect extends CStructWrapper
 		super(pointer, allocationType, allocationFlag);
 	}
 
-	@Override
-	protected void finalize() /*throws Throwable*/
-	{
-		switch (allocationType)
-		{
-			case FROM_INSTANCE: break;
-			case ALLOC: break;
-			case CUSTOM: customFinalize(); break;
-			default: break;
-		}
-	}
-
-	private void customFinalize()
-	{
-		switch (allocationFlag)
-		{
-			case 0: break;
-			case 1: break;
-			default: break;
-		}
-	}
-
 	public static AVDeviceRect from(long pointer)
 	{
 		return from(pointer, AllocationType.FROM_INSTANCE, 0);

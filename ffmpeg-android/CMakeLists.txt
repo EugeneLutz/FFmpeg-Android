@@ -81,6 +81,7 @@ add_library(nativelib SHARED
         ${cpp_dir}/avfilter-av_filter_graph.cpp
         ${cpp_dir}/avfilter-av_filter_in_out.cpp
         ${cpp_dir}/avutil-av_frame.cpp
+        ${cpp_dir}/avutil-av_util.cpp
         ${cpp_dir}/remuxing_sample.cpp)
 
 

@@ -2,24 +2,39 @@ package com.eugene_lutz.ffmpeg_android;
 
 public class CStructWrapper implements AutoCloseable
 {
+	static {
+		FFmpegAndroid.loadLibraries();
+	}
+
 	public enum AllocationType
 	{
+		/**
+		 * The object is obtained from instance
+		 */
 		FROM_INSTANCE,
+
+		/**
+		 * The object is obtained from memory allocation function
+		 */
 		ALLOC,
+
+		/**
+		 * Another cases
+		 */
 		CUSTOM
 	}
 
 
 
-	protected final long pointer;
+	protected /*final*/ long pointer;
 	protected final AllocationType allocationType;
-	protected final int allocationFlag;
+	protected final int customFlag;
 
-	protected CStructWrapper(long pointer, AllocationType allocationType, int allocationFlag)
+	protected CStructWrapper(long pointer, AllocationType allocationType, int customFlag)
 	{
 		this.pointer = pointer;
 		this.allocationType = allocationType;
-		this.allocationFlag = allocationFlag;
+		this.customFlag = customFlag;
 	}
 
 	@Override
@@ -36,23 +51,30 @@ public class CStructWrapper implements AutoCloseable
 
 	private void _release()
 	{
+		if (pointer == 0)
+		{
+			return;
+		}
+
 		switch (allocationType)
 		{
-			case FROM_INSTANCE: break;
-			case ALLOC: break;
-			case CUSTOM: finalizeCustom(allocationFlag); break;
+			//case FROM_INSTANCE: break;
+			case ALLOC: finalizeDefault(); break;
+			case CUSTOM: finalizeCustom(customFlag); break;
 			default: break;
 		}
+
+		pointer = 0;
 	}
 
-	protected void freeData()
+	protected void finalizeDefault()
 	{
-		//
+		// Implement in derived classes if deeded
 	}
 
 	protected void finalizeCustom(int flag)
 	{
-		//
+		// Implement in derived classes if deeded
 	}
 
 	public long getPointer()
@@ -65,8 +87,8 @@ public class CStructWrapper implements AutoCloseable
 		return allocationType;
 	}
 
-	public int getAllocationFlag()
+	public int getCustomFlag()
 	{
-		return allocationFlag;
+		return customFlag;
 	}
 }

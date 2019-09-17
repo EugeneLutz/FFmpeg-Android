@@ -19,25 +19,9 @@ public class AVFilterGraph extends CStructWrapper
 	}
 
 	@Override
-	protected void finalize() /*throws Throwable*/
+	protected void finalizeDefault()
 	{
-		switch (allocationType)
-		{
-			case FROM_INSTANCE: break;
-			case ALLOC: freeNative(pointer); break;
-			case CUSTOM: customFinalize(); break;
-			default: break;
-		}
-	}
-
-	private void customFinalize()
-	{
-		switch (allocationFlag)
-		{
-			case 0: break;
-			case 1: break;
-			default: break;
-		}
+		freeNative(pointer);
 	}
 
 	public static AVFilterGraph from(long pointer)

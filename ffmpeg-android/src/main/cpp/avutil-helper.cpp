@@ -41,7 +41,7 @@ long AVMediaTypeToLong(AVMediaType mediaType)
     return IndexMap<AVMediaType>::GetIndexByValue(mediaTypeMap, mediaType);
 }
 
-AVMediaType longToAVMediaType(long value)
+AVMediaType longToAVMediaType(long index)
 {
-    return IndexMap<AVMediaType>::GetValueByIndex(mediaTypeMap, value);
+    return IndexMap<AVMediaType>::GetValueByIndex(mediaTypeMap, index);
 }

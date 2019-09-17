@@ -14,17 +14,10 @@ public class AVPacket extends CStructWrapper
 	}
 
 	@Override
-	protected void finalize() /*throws Throwable*/
+	protected void finalizeDefault()
 	{
-		switch (allocationType)
-		{
-			case FROM_INSTANCE: break;
-			case ALLOC: releaseNative(pointer); break;
-			default: break;
-		}
+		releaseNative(pointer);
 	}
-
-
 
 	public static AVPacket from(long pointer)
 	{

@@ -81,22 +81,15 @@ public class AVFormatContext extends CStructWrapper
 	}
 
 	@Override
-	protected void finalize() /*throws Throwable*/
+	protected void finalizeDefault()
 	{
-		if (pointer == 0)
-		{
-			return;
-		}
+		freeContextNative(pointer);
+	}
 
-		// Уничтожим объект нужным способом в зависимости от allocationType
-		switch (allocationType)
-		{
-			case ALLOC:freeContextNative(pointer); break;
-			case CUSTOM: closeInputNative(pointer); break;
-			default: break;
-		}
-
-		Log.d(LOG_TAG, "AVFormatContext is dead");
+	@Override
+	protected void finalizeCustom(int flag)
+	{
+		closeInputNative(pointer);
 	}
 
 	//endregion
