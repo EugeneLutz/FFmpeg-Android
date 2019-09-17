@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class AVCodecLibraryTests
+public class AVCodecTests
 {
 	private static final String TAG = "LuxuryTest";
 
@@ -49,7 +49,10 @@ public class AVCodecLibraryTests
 		final AVMediaType mediaType = codec.getCodecMediaType();
 		final String mediaTypeString = AVUtil.getMediaTypeString(mediaType);
 
-		Log.d(TAG, String.format("%s (%s): %s - %s", codecId.toString(), mediaTypeString, name, description));
+		final String group = codec.getCodecGroupName();
+
+		Log.d(TAG, String.format("%s (%s): %s - %s. Group: %s",
+				codecId.toString(), mediaTypeString, name, description, group));
 
 		final AVCodecID receivedCodecId = codec.getCodecId();
 		assertEquals(codecId, receivedCodecId);
@@ -115,5 +118,48 @@ public class AVCodecLibraryTests
 		}
 
 		Log.d(TAG, "All codecs checked");
+	}
+
+	private void dumpCodec(AVCodec codec)
+	{
+		if (codec == null)
+		{
+			return;
+		}
+
+		final String name = codec.getCodecName();
+
+		StringBuilder builder = new StringBuilder();
+		if (codec.isAnyFrameRateSupported())
+		{
+			builder.append(String.format("%s supports any framerate.\n", name));
+		}
+		else
+		{
+			final int numSupportedFramerates = codec.getNumSupportedFramerates();
+			builder.append(String.format("Number of supported framerates: %d.\n", numSupportedFramerates));
+		}
+
+		Log.d(TAG, builder.toString());
+	}
+
+	@Test
+	public void checkCodecCapabilities() throws Exception
+	{
+		final AVCodecID codecId = AVCodecID.AV_CODEC_ID_H264;
+		try (AVCodec codec = AVCodec.findDecoder(codecId))
+		{
+			final int[] existingCapabilities = AVCodec.getAllExistingCapabilities();
+			final int capabilities = codec.getCodecCapabilities();
+			for (final int c : existingCapabilities)
+			{
+				if ((capabilities & c) == c)
+				{
+					Log.d(TAG, String.format("%s has capability %d", codecId.toString(), c));
+				}
+			}
+
+			dumpCodec(codec);
+		}
 	}
 }

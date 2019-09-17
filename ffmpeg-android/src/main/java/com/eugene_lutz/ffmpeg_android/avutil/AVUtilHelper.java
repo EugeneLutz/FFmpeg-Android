@@ -47,7 +47,7 @@ public class AVUtilHelper
 		mediaTypeMap.add(new IndexMap<>(AVMediaType.AVMEDIA_TYPE_DATA, 4));
 		mediaTypeMap.add(new IndexMap<>(AVMediaType.AVMEDIA_TYPE_SUBTITLE, 5));
 		mediaTypeMap.add(new IndexMap<>(AVMediaType.AVMEDIA_TYPE_ATTACHMENT, 6));
-		mediaTypeMap.add(new IndexMap<>(AVMediaType.AVMEDIA_TYPE_NB, 7));
+		//mediaTypeMap.add(new IndexMap<>(AVMediaType.AVMEDIA_TYPE_NB, 7));
 	}
 
 

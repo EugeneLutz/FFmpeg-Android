@@ -50,6 +50,11 @@ JNI_FUNCTION(jstring, avcodec_AVCodec, getCodecNameNative)(JNIEnv* env, jclass, 
 {
     auto codec = getCodec(pointer);
     auto charName = codec->name;
+    if (charName == nullptr)
+    {
+        return nullptr;
+    }
+
     auto name = env->NewStringUTF(charName);
     return name;
 }
@@ -59,6 +64,11 @@ JNI_FUNCTION(jstring, avcodec_AVCodec, getCodecDescriptionNative)(JNIEnv* env, j
 {
     auto codec = getCodec(pointer);
     auto charName = codec->long_name;
+    if (charName == nullptr)
+    {
+        return nullptr;
+    }
+
     auto name = env->NewStringUTF(charName);
     return name;
 }
@@ -77,4 +87,44 @@ JNI_FUNCTION(jlong, avcodec_AVCodec, getCodecIdNative)(JNIEnv*, jclass, jlong po
     auto codec = getCodec(pointer);
     auto index = AVCodecIDToLong(codec->id);
     return tojlong(index);
+}
+
+
+JNI_FUNCTION(jint, avcodec_AVCodec, getCodecCapabilitiesNative)(JNIEnv*, jclass, jlong pointer)
+{
+    auto codec = getCodec(pointer);
+    return tojint(codec->capabilities);
+}
+
+
+JNI_FUNCTION(jint, avcodec_AVCodec, getNumSupportedFrameratesNative)(JNIEnv*, jclass, jlong pointer)
+{
+    auto codec = getCodec(pointer);
+    auto numSupportedFramerates = 0;
+    if (codec->supported_framerates == nullptr)
+    {
+        return 0;
+    }
+
+    while (codec->supported_framerates[numSupportedFramerates].den != 0 &&
+           codec->supported_framerates[numSupportedFramerates].num != 0)
+    {
+        numSupportedFramerates++;
+    }
+
+    return tojint(numSupportedFramerates);
+}
+
+
+JNI_FUNCTION(jstring, avcodec_AVCodec, getCodecGroupNameNative)(JNIEnv* env, jclass, jlong pointer)
+{
+    auto codec = getCodec(pointer);
+    auto charName = codec->wrapper_name;
+    if (charName == nullptr)
+    {
+        return nullptr;
+    }
+
+    auto name = env->NewStringUTF(charName);
+    return name;
 }
