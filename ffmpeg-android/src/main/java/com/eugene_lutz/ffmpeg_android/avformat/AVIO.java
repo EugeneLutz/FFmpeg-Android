@@ -19,7 +19,7 @@ public class AVIO
 	/**
 	 * ORing this as the "whence" parameter to a seek function causes it to
 	 * return the filesize without seeking anywhere. Supporting this is optional.
-	 * If it is not supported then the seek function will return <0.
+	 * If it is not supported then the seek function will return {@literal <} 0.
 	 */
 	public static final int AVSEEK_SIZE = 0x10000;
 

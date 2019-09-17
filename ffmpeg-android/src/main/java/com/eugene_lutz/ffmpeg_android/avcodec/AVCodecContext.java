@@ -45,7 +45,7 @@ public class AVCodecContext extends CStructWrapper
 	 * par are freed and replaced with duplicates of the corresponding field in par.
 	 * Fields in codec that do not have a counterpart in par are not touched.
 	 *
-	 * @return >= 0 on success, a negative AVERROR code on failure.
+	 * @return {@literal >}= 0 on success, a negative AVERROR code on failure.
 	 */
 	public int fillFromParameters(AVCodecParameters parameters)
 	{
@@ -60,18 +60,18 @@ public class AVCodecContext extends CStructWrapper
 	 * decoded. (For example AVCodecContext.skip_frame, which might direct the
 	 * decoder to drop the frame contained by the packet sent with this function.)
 	 *
-	 * @warning The input buffer, avpkt->data must be AV_INPUT_BUFFER_PADDING_SIZE
+	 * warning: The input buffer, avpkt-{@literal >}data must be AV_INPUT_BUFFER_PADDING_SIZE
 	 *          larger than the actual read bytes because some optimized bitstream
 	 *          readers read 32 or 64 bits at once and could read over the end.
 	 *
-	 * @warning Do not mix this API with the legacy API (like avcodec_decode_video2())
+	 * warning: Do not mix this API with the legacy API (like avcodec_decode_video2())
 	 *          on the same AVCodecContext. It will return unexpected results now
 	 *          or in future libavcodec versions.
 	 *
-	 * @note The AVCodecContext MUST have been opened with @ref avcodec_open2()
+	 * note: The AVCodecContext MUST have been opened with @ref avcodec_open2()
 	 *       before packets may be fed to the decoder.
 	 *
-	 * @param[in] avpkt The input AVPacket. Usually, this will be a single video
+	 * param[in] avpkt The input AVPacket. Usually, this will be a single video
 	 *                  frame, or several complete audio frames.
 	 *                  Ownership of the packet remains with the caller, and the
 	 *                  decoder will not write to the packet. The decoder may create
@@ -110,7 +110,7 @@ public class AVCodecContext extends CStructWrapper
 	 * Supply a raw video or audio frame to the encoder. Use avcodec_receive_packet()
 	 * to retrieve buffered output packets.
 	 *
-	 * @param[in] frame AVFrame containing the raw audio or video frame to be encoded.
+	 * param[in] frame AVFrame containing the raw audio or video frame to be encoded.
 	 *                  Ownership of the frame remains with the caller, and the
 	 *                  encoder will not write to the frame. The encoder may create
 	 *                  a reference to the frame data (or copy it if the frame is
@@ -125,9 +125,9 @@ public class AVCodecContext extends CStructWrapper
 	 *                  For audio:
 	 *                  If AV_CODEC_CAP_VARIABLE_FRAME_SIZE is set, then each frame
 	 *                  can have any number of samples.
-	 *                  If it is not set, frame->nb_samples must be equal to
-	 *                  avctx->frame_size for all frames except the last.
-	 *                  The final frame may be smaller than avctx->frame_size.
+	 *                  If it is not set, frame-{@literal >}nb_samples must be equal to
+	 *                  avctx-{@literal >}frame_size for all frames except the last.
+	 *                  The final frame may be smaller than avctx-{@literal >}frame_size.
 	 * @return 0 on success, otherwise negative error code:
 	 *      AVERROR(EAGAIN):   input is not accepted in the current state - user
 	 *                         must read output with avcodec_receive_packet() (once

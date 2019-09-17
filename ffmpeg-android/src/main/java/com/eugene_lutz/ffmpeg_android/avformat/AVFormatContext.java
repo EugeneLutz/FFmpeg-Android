@@ -259,7 +259,7 @@ public class AVFormatContext extends CStructWrapper
 		return AVRational.from(rational, AVRational.AllocationType.ALLOC);
 	}
 
-	/**
+	/*
 	 * Seek to the keyframe at timestamp.
 	 * 'timestamp' in 'stream_index'.
 	 *

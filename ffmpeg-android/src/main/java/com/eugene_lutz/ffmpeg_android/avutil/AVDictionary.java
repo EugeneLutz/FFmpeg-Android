@@ -137,7 +137,7 @@ public class AVDictionary extends CStructWrapper
 	 * @param key entry key to add.
 	 * @param value entry value to add.
 	 *        Passing a null value will cause an existing entry to be deleted.
-	 * @return >= 0 on success otherwise an error code <0
+	 * @return {@literal >}= 0 on success otherwise an error code {@literal <}0
 	 */
 	public int set(String key, String value, int flags)
 	{
@@ -177,7 +177,7 @@ public class AVDictionary extends CStructWrapper
 	 * Copy entries from source AVDictionary struct into this dictionary.
 	 * @param source pointer to source AVDictionary struct
 	 * @param flags flags to use when setting entries in this object
-	 * @note metadata is read using the AV_DICT_IGNORE_SUFFIX flag
+	 * note: metadata is read using the AV_DICT_IGNORE_SUFFIX flag
 	 * @return 0 on success, negative AVERROR code on failure. If dst was allocated
 	 *           by this function, callers should free the associated memory.
 	 */
@@ -219,7 +219,7 @@ public class AVDictionary extends CStructWrapper
 	 *
 	 * @param  keyValSep   character used to separate key from value
 	 * @param  pairsSep     character used to separate two pairs from each other
-	 * @return                   >= 0 on success, negative on error
+	 * @return                   {@literal >}= 0 on success, negative on error
 	 */
 	public GetStringResult getString(char keyValSep, char pairsSep)
 	{

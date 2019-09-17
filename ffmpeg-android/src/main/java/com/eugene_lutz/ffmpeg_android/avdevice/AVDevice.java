@@ -119,7 +119,7 @@ public class AVDevice
 	 * Dummy message.
 	 *
 	 * @param context   device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when device doesn't implement handler of the message.
 	 */
 	public static int appToDevNone(AVFormatContext context)
@@ -137,7 +137,7 @@ public class AVDevice
 	 *
 	 * @param context   device context.
 	 * @param rect      new window size.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when device doesn't implement handler of the message.
 	 */
 	public static int appToDevWindowSize(AVFormatContext context, AVDeviceRect rect)
@@ -157,7 +157,7 @@ public class AVDevice
 	 * @param context   device context.
 	 * @param rect      area required to be repainted.
 	 *                  null if whole area is required to be repainted.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when device doesn't implement handler of the message.
 	 */
 	public static int appToDevWindowRepaint(AVFormatContext context, AVDeviceRect rect)
@@ -174,7 +174,7 @@ public class AVDevice
 	 * By default devices are not paused.
 	 *
 	 * @param context   device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when device doesn't implement handler of the message.
 	 */
 	public static int appToDevPause(AVFormatContext context)
@@ -191,7 +191,7 @@ public class AVDevice
 	 * By default devices are not paused.
 	 *
 	 * @param context   device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when device doesn't implement handler of the message.
 	 */
 	public static int appToDevPlay(AVFormatContext context)
@@ -208,7 +208,7 @@ public class AVDevice
 	 * By default devices are not paused.
 	 *
 	 * @param context   device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when device doesn't implement handler of the message.
 	 */
 	public static int appToDevTogglePause(AVFormatContext context)
@@ -226,7 +226,7 @@ public class AVDevice
 	 *
 	 * @param context   device context.
 	 * @param volume    new volume with range of 0.0 - 1.0.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when device doesn't implement handler of the message.
 	 */
 	public static int appToDevSetVolume(AVFormatContext context, double volume)
@@ -243,7 +243,7 @@ public class AVDevice
 	 *  change is expected when possible.
 	 *
 	 * @param context   device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when device doesn't implement handler of the message.
 	 */
 	public static int appToDevMute(AVFormatContext context)
@@ -260,7 +260,7 @@ public class AVDevice
 	 * change is expected when possible.
 	 *
 	 * @param context   device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when device doesn't implement handler of the message.
 	 */
 	public static int appToDevUnmute(AVFormatContext context)
@@ -277,7 +277,7 @@ public class AVDevice
 	 * change is expected when possible.
 	 *
 	 * @param context   device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when device doesn't implement handler of the message.
 	 */
 	public static int appToDevToggleMute(AVFormatContext context)
@@ -290,7 +290,7 @@ public class AVDevice
 	 * Get volume messages.
 	 *
 	 * @param context   device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when device doesn't implement handler of the message.
 	 */
 	public static int appToDevGetVolume(AVFormatContext context)
@@ -303,7 +303,7 @@ public class AVDevice
 	 * Get mute messages.
 	 *
 	 * @param context   device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when device doesn't implement handler of the message.
 	 */
 	public static int appToDevGetMute(AVFormatContext context)
@@ -321,7 +321,7 @@ public class AVDevice
 	 * Dummy message.
 	 *
 	 * @param context    device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when application doesn't implement handler of the message.
 	 */
 	public static int devToAppNone(AVFormatContext context)
@@ -344,7 +344,7 @@ public class AVDevice
 	 * @param context    device context.
 	 * @param rect       preferred size of the window buffer.
 	 *                   NULL: no preferred size of the window buffer.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when application doesn't implement handler of the message.
 	 */
 	public static int devToAppCreateWindowBuffer(AVFormatContext context, AVDeviceRect rect)
@@ -361,7 +361,7 @@ public class AVDevice
 	 * Message is sent before rendering of each frame.
 	 *
 	 * @param context    device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when application doesn't implement handler of the message.
 	 */
 	public static int devToAppPrepareWindowBuffer(AVFormatContext context)
@@ -378,7 +378,7 @@ public class AVDevice
 	 * Usually buffers need to be swapped in handler of this message.
 	 *
 	 * @param context    device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when application doesn't implement handler of the message.
 	 */
 	public static int devToAppDisplayWindowBuffer(AVFormatContext context)
@@ -395,7 +395,7 @@ public class AVDevice
 	 * buffer is not required anymore.
 	 *
 	 * @param context    device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when application doesn't implement handler of the message.
 	 */
 	public static int devToAppDestroyWindowBuffer(AVFormatContext context)
@@ -410,7 +410,7 @@ public class AVDevice
 	 * Device signals buffer overflow.
 	 *
 	 * @param context    device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when application doesn't implement handler of the message.
 	 */
 	public static int devToAppBufferOverflow(AVFormatContext context)
@@ -425,7 +425,7 @@ public class AVDevice
 	 * Device signals buffer underflow.
 	 *
 	 * @param context    device context.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when application doesn't implement handler of the message.
 	 */
 	public static int devToAppBufferUnderflow(AVFormatContext context)
@@ -445,7 +445,7 @@ public class AVDevice
 	 * @param context          device context.
 	 * @param amountAvailable  amount of bytes available to read is known.
 	 * @param amount           amount of bytes available to read.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when application doesn't implement handler of the message.
 	 */
 	public static int devToAppBufferReadable(AVFormatContext context, boolean amountAvailable, long amount)
@@ -465,7 +465,7 @@ public class AVDevice
 	 * @param context          device context.
 	 * @param amountAvailable  amount of bytes available to write is known.
 	 * @param amount           amount of bytes available to write.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when application doesn't implement handler of the message.
 	 */
 	public static int devToAppBufferWritable(AVFormatContext context, boolean amountAvailable, long amount)
@@ -481,7 +481,7 @@ public class AVDevice
 	 *
 	 * @param context    device context.
 	 * @param state      0 for not muted state, non-zero for muted state.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when application doesn't implement handler of the message.
 	 */
 	public static int devToAppMuteStateChanged(AVFormatContext context, int state)
@@ -497,7 +497,7 @@ public class AVDevice
 	 *
 	 * @param context    device context.
 	 * @param volume     new volume with range of 0.0 - 1.0.
-	 * @return >= 0 on success, negative on error.
+	 * @return {@literal >}= 0 on success, negative on error.
 	 *         AVERROR(ENOSYS) when application doesn't implement handler of the message.
 	 */
 	public static int devToAppVolumeLevelChanged(AVFormatContext context, double volume)

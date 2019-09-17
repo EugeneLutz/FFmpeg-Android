@@ -31,7 +31,7 @@ public class AVClass extends CStructWrapper
 	/**
 	 * Get category used for visualization (like color)
 	 * This is only set if the category is equal for all objects using this class.
-	 * available since version (51 << 16 | 56 << 8 | 100)
+	 * available since version (51 {@literal <}{@literal <} 16 | 56 {@literal <}{@literal <} 8 | 100)
 	 */
 	public AVClassCategory getClassCategory()
 	{

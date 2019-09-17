@@ -46,7 +46,7 @@ public class AVCodecParameters extends CStructWrapper
 	 * context. Any allocated fields in par are freed and replaced with duplicates
 	 * of the corresponding fields in codec.
 	 *
-	 * @return >= 0 on success, a negative AVERROR code on failure
+	 * @return {@literal >}= 0 on success, a negative AVERROR code on failure
 	 */
 	public int fillFromContext(AVCodecContext context)
 	{

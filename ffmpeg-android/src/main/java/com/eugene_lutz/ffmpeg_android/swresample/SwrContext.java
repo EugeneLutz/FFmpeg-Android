@@ -62,7 +62,7 @@ public class SwrContext extends CStructWrapper
 
 
 
-	/**
+	/*
 	 * Initialize context after user parameters have been set.
 	 * @note The context must be configured using the AVOption API.
 	 *
@@ -123,7 +123,7 @@ public class SwrContext extends CStructWrapper
 		return 0;
 	}*/
 
-	/**
+	/*
 	 * Convert the next timestamp from input to output
 	 * timestamps are in 1/(in_sample_rate * out_sample_rate) units.
 	 *
@@ -142,7 +142,7 @@ public class SwrContext extends CStructWrapper
 		return nextPtsNative(pointer, pts);
 	}
 
-	/**
+	/*
 	 * Activate resampling compensation ("soft" compensation). This function is
 	 * internally called when needed in swr_next_pts().
 	 *

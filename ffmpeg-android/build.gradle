@@ -22,10 +22,11 @@ android {
             abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
         }
     }
+
     buildTypes {
         release {
-            debuggable true
-            jniDebuggable true
+            debuggable false
+            jniDebuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -36,6 +37,7 @@ android {
             minifyEnabled false
         }
     }
+
     externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
@@ -53,9 +55,120 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:2.0.0-beta2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+
+/* * * BINTRAY HELL * * */
+
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+ext {
+    bintrayRepo = 'Maven'
+    bintrayName = 'FFmpeg-Android'
+
+    publishedGroupId = 'com.eugene_lutz.ffmpeg'
+    libraryName = 'FFmpeg-Android'
+    artifact = 'ffmpeg-android'
+
+    libraryDescription = 'Java wrapper over FFmpeg for Android.'
+
+    siteUrl = 'https://github.com/EugeneLutz/FFmpeg-Android'
+    gitUrl = 'https://github.com/EugeneLutz/FFmpeg-Android.git'
+
+    libraryVersion = properties.getProperty("lib.version")
+
+    developerId = 'eugene-lutz'
+    developerName = 'Eugene Lutz'
+    developerEmail = properties.getProperty("dev.email")
+
+    licenseName = 'LGPL, Version 2.1'
+    licenseUrl = 'http://www.opensource.org/licenses/lgpl-2.1.php'
+    allLicenses = ["LGPL-2.1"]
+}
+
+group = publishedGroupId
+version = libraryVersion
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            packaging 'aar'
+            groupId publishedGroupId
+            artifactId artifact
+
+            name libraryName
+            description libraryDescription
+            url siteUrl
+
+            licenses {
+                license {
+                    name licenseName
+                    url licenseUrl
+                }
+            }
+            developers {
+                developer {
+                    id developerId
+                    name developerName
+                    email developerEmail
+                }
+            }
+            scm {
+                connection gitUrl
+                developerConnection gitUrl
+                url siteUrl
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        desc = libraryDescription
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = allLicenses
+        dryRun = false
+        publish = true
+        override = false
+        publicDownloadNumbers = true
+        version {
+            desc = libraryDescription
+        }
+    }
 }

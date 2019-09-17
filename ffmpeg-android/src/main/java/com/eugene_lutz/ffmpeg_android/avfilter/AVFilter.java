@@ -1,7 +1,5 @@
 package com.eugene_lutz.ffmpeg_android.avfilter;
 
-import android.support.annotation.NonNull;
-
 import com.eugene_lutz.ffmpeg_android.CStructWrapper;
 import com.eugene_lutz.ffmpeg_android.OpaqueIterator;
 
@@ -50,7 +48,7 @@ public class AVFilter extends CStructWrapper
 	 * have its filter_frame() callback(s) called as usual even when the enable
 	 * expression is false. The filter will disable filtering within the
 	 * filter_frame() callback(s) itself, for example executing code depending on
-	 * the AVFilterContext->is_disabled value.
+	 * the AVFilterContext.is_disabled value.
 	 */
 	public static final int AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL = (1 << 17);
 
@@ -193,7 +191,6 @@ public class AVFilter extends CStructWrapper
 	/**
 	 * Уникальное название фильтра
 	 * */
-	@NonNull
 	public String getName()
 	{
 		return getNameNative(pointer);

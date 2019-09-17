@@ -25,19 +25,19 @@ public enum AVRounding
 	 * enumeration through a bitwise OR, in order to set behavior for normal
 	 * cases.
 	 *
-	 * @code{.c}
+	 * code{.c}
 	 * av_rescale_rnd(3, 1, 2, AV_ROUND_UP | AV_ROUND_PASS_MINMAX);
 	 * // Rescaling 3:
 	 * //     Calculating 3 * 1 / 2
 	 * //     3 / 2 is rounded up to 2
-	 * //     => 2
+	 * //     ={@literal >} 2
 	 *
 	 * av_rescale_rnd(AV_NOPTS_VALUE, 1, 2, AV_ROUND_UP | AV_ROUND_PASS_MINMAX);
 	 * // Rescaling AV_NOPTS_VALUE:
 	 * //     AV_NOPTS_VALUE == INT64_MIN
 	 * //     AV_NOPTS_VALUE is passed through
-	 * //     => AV_NOPTS_VALUE
-	 * @endcode
+	 * //     ={@literal >} AV_NOPTS_VALUE
+	 * endcode
 	 */
 	AV_ROUND_PASS_MINMAX
 }

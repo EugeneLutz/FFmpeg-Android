@@ -67,6 +67,9 @@ public class AVFilterInOut extends CStructWrapper
 	/**
 	 * Allocate a single AVFilterInOut entry.
 	 * Must be freed with avfilter_inout_free().
+	 * @param name name
+	 * @param context context
+	 * @param padIndex pad index
 	 * @return allocated AVFilterInOut on success, null on failure.
 	 */
 	public AVFilterInOut create(String name, AVFilterContext context, int padIndex)

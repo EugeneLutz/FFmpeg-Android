@@ -133,7 +133,7 @@ public class AVFilterContext extends CStructWrapper
 	 *                a dict containing options that were not found.
 	 * @return 0 on success, a negative AVERROR on failure
 	 *
-	 * @note This function and avfilter_init_str() do essentially the same thing,
+	 * note: This function and avfilter_init_str() do essentially the same thing,
 	 * the difference is in manner in which the options are passed. It is up to the
 	 * calling code to choose whichever is more preferable. The two functions also
 	 * behave differently when some of the provided options are not declared as
@@ -160,6 +160,7 @@ public class AVFilterContext extends CStructWrapper
 
 	/**
 	 * The AVFilter of which this is an instance
+	 * @return The AVFilter of which this is an instance
 	 * */
 	public AVFilter getFilter()
 	{
@@ -169,6 +170,7 @@ public class AVFilterContext extends CStructWrapper
 
 	/**
 	 * Name of this filter instance
+	 * @return Name of this filter instance
 	 * */
 	public String getName()
 	{
@@ -221,6 +223,7 @@ public class AVFilterContext extends CStructWrapper
 
 	/**
 	 * Filtergraph this filter belongs to
+	 * @return the filter graph
 	 * */
 	public AVFilterGraph getFilterGraph()
 	{
@@ -243,6 +246,7 @@ public class AVFilterContext extends CStructWrapper
 	 *
 	 * After the filter is initialized, libavfilter sets this field to the
 	 * threading type that is actually used (0 for no multithreading).
+	 * @return Type of multithreading being allowed/used
 	 */
 	public int getThreadType()
 	{
@@ -261,6 +265,7 @@ public class AVFilterContext extends CStructWrapper
 	 * in particular, a filter which consumes or processes hardware frames will
 	 * instead use the hw_frames_ctx field in AVFilterLink to carry the
 	 * hardware context information.
+	 * @return hardware context
 	 */
 	public AVBufferRef getHardwareContext()
 	{
@@ -270,8 +275,9 @@ public class AVFilterContext extends CStructWrapper
 
 	/**
 	 * Max number of threads allowed in this filter instance.
-	 * If <= 0, its value is ignored.
+	 * If {@literal <}= 0, its value is ignored.
 	 * Overrides global number of threads set per filter graph.
+	 * @return Max number of threads
 	 */
 	public int getMaxNumberOfThreads()
 	{
@@ -282,6 +288,7 @@ public class AVFilterContext extends CStructWrapper
 	 * Ready status of the filter.
 	 * A non-0 value means that the filter needs activating;
 	 * a higher value suggests a more urgent activation.
+	 * @return Ready status of the filter
 	 */
 	public int getReadyStatus()
 	{
@@ -301,6 +308,7 @@ public class AVFilterContext extends CStructWrapper
 	 *
 	 * This field must be set before the graph containing this filter is
 	 * configured.
+	 * @return number of extra hardware frames
 	 */
 	public int getNumExtraHardwareFrames()
 	{
@@ -313,6 +321,7 @@ public class AVFilterContext extends CStructWrapper
 
 	/**
 	 * Name of this filter instance
+	 * @param value value
 	 * */
 	public void setName(String value)
 	{
@@ -361,6 +370,7 @@ public class AVFilterContext extends CStructWrapper
 
 	/**
 	 * Filtergraph this filter belongs to
+	 * @param value value
 	 * */
 	public void setFilterGraph(AVFilterGraph value)
 	{
@@ -382,6 +392,7 @@ public class AVFilterContext extends CStructWrapper
 	 *
 	 * After the filter is initialized, libavfilter sets this field to the
 	 * threading type that is actually used (0 for no multithreading).
+	 * @param value value
 	 */
 	public void setThreadType(int value)
 	{
@@ -399,6 +410,7 @@ public class AVFilterContext extends CStructWrapper
 	 * in particular, a filter which consumes or processes hardware frames will
 	 * instead use the hw_frames_ctx field in AVFilterLink to carry the
 	 * hardware context information.
+	 * @param value value
 	 */
 	public void setHardwareContext(AVBufferRef value)
 	{
@@ -407,8 +419,9 @@ public class AVFilterContext extends CStructWrapper
 
 	/**
 	 * Max number of threads allowed in this filter instance.
-	 * If <= 0, its value is ignored.
+	 * If {@literal <}= 0, its value is ignored.
 	 * Overrides global number of threads set per filter graph.
+	 * @param value value
 	 */
 	public void setMaxNumberOfThreads(int value)
 	{
@@ -419,6 +432,7 @@ public class AVFilterContext extends CStructWrapper
 	 * Ready status of the filter.
 	 * A non-0 value means that the filter needs activating;
 	 * a higher value suggests a more urgent activation.
+	 * @param value value
 	 */
 	public void setReadyStatus(int value)
 	{
@@ -438,6 +452,7 @@ public class AVFilterContext extends CStructWrapper
 	 *
 	 * This field must be set before the graph containing this filter is
 	 * configured.
+	 * @param value value
 	 */
 	public void setNumExtraHardwareFrames(int value)
 	{

@@ -7,7 +7,7 @@ public class Mathematics
 	public static final int AV_ROUND_DOWN     = 2; ///< Round toward -infinity.
 	public static final int AV_ROUND_UP       = 3; ///< Round toward +infinity.
 	public static final int AV_ROUND_NEAR_INF = 5; ///< Round to nearest and halfway cases away from zero.
-	/**
+	/*
 	 * Flag telling rescaling functions to pass `INT64_MIN`/`MAX` through
 	 * unchanged, avoiding special cases for #AV_NOPTS_VALUE.
 	 *
@@ -55,7 +55,7 @@ public class Mathematics
 		return rescaleQNative(a, bq.getPointer(), cq.getPointer());
 	}
 
-	/**
+	/*
 	 * Compute the greatest common divisor of two integer operands.
 	 *
 	 * @param a,b Operands

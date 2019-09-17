@@ -96,7 +96,7 @@ public class AVIOContext extends CStructWrapper
 
 	//region Static methods
 
-	/**
+	/*
 	 * TODO: finish description
 	 * Create and initialize a AVIOContext for accessing the
 	 * resource indicated by url.
@@ -108,7 +108,7 @@ public class AVIOContext extends CStructWrapper
 	 * @param path resource to access
 	 * @param flags AVIO.AVIO_FLAG_* flags which control how the resource indicated by url
 	 * is to be opened
-	 * @return >= 0 in case of success, a negative value corresponding to an
+	 * @return > = 0 in case of success, a negative value corresponding to an
 	 * AVERROR code in case of failure
 	 */
 	public static CreateResult open(String path, int flags)
