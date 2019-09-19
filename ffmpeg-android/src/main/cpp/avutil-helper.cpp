@@ -1,9 +1,11 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "cppcoreguidelines-avoid-magic-numbers"
 #include <jni.h>
 #include <string>
 #include <vector>
 
-#include "util.h"
-#include "avutil-helper.h"
+#include "util.hpp"
+#include "avutil-helper.hpp"
 
 
 static std::vector<IndexMap<AVRounding>> roundingMap;
@@ -301,3 +303,49 @@ AVPixelFormat longToAVPixelFormat(long value)
 
     return IndexMap<AVPixelFormat>::GetValueByIndex(pixelFormatMap, value);
 }
+
+
+static std::vector<IndexMap<AVColorPrimaries>> colorPrimariesMap;
+static bool _colorPrimariesInitialized = false;
+static void initializeColorPrimariesMap()
+{
+    colorPrimariesMap.clear();
+    colorPrimariesMap.emplace_back(AVCOL_PRI_RESERVED0, 1);
+    colorPrimariesMap.emplace_back(AVCOL_PRI_BT709, 2);
+    colorPrimariesMap.emplace_back(AVCOL_PRI_UNSPECIFIED, 3);
+    colorPrimariesMap.emplace_back(AVCOL_PRI_RESERVED, 4);
+    colorPrimariesMap.emplace_back(AVCOL_PRI_BT470M, 5);
+    colorPrimariesMap.emplace_back(AVCOL_PRI_BT470BG, 6);
+    colorPrimariesMap.emplace_back(AVCOL_PRI_SMPTE170M, 7);
+    colorPrimariesMap.emplace_back(AVCOL_PRI_SMPTE240M, 8);
+    colorPrimariesMap.emplace_back(AVCOL_PRI_FILM, 9);
+    colorPrimariesMap.emplace_back(AVCOL_PRI_BT2020, 10);
+    colorPrimariesMap.emplace_back(AVCOL_PRI_SMPTE428, 11);
+    colorPrimariesMap.emplace_back(AVCOL_PRI_SMPTE431, 12);
+    colorPrimariesMap.emplace_back(AVCOL_PRI_SMPTE432, 13);
+    colorPrimariesMap.emplace_back(AVCOL_PRI_JEDEC_P22, 14);
+
+    _colorPrimariesInitialized = true;
+}
+
+long AVColorPrimariesToLong(AVColorPrimaries colorPrimaries)
+{
+    if (!_colorPrimariesInitialized)
+    {
+        initializeColorPrimariesMap();
+    }
+
+    return IndexMap<AVColorPrimaries>::GetIndexByValue(colorPrimariesMap, colorPrimaries);
+}
+
+AVColorPrimaries longToAVColorPrimaries(long value)
+{
+    if (!_colorPrimariesInitialized)
+    {
+        initializeColorPrimariesMap();
+    }
+
+    return IndexMap<AVColorPrimaries>::GetValueByIndex(colorPrimariesMap, value);
+}
+
+#pragma clang diagnostic pop

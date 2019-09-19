@@ -5,10 +5,10 @@ extern "C" {
 #include <libavfilter/avfilter.h>
 }
 
-#include "util.h"
-#include "cstruct_wrapper.h"
-#include "avutil-helper.h"
-#include "avfilter-helper.h"
+#include "util.hpp"
+#include "cstruct_wrapper.hpp"
+#include "avutil-helper.hpp"
+#include "avfilter-helper.hpp"
 
 
 static AVFilterContext* getContext(jlong pointer)

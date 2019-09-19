@@ -1,11 +1,11 @@
-#ifndef HELLOFFMPEG_AVFILTER_HELPER_H
-#define HELLOFFMPEG_AVFILTER_HELPER_H
+#ifndef HELLOFFMPEG_AVFILTER_HELPER_HPP
+#define HELLOFFMPEG_AVFILTER_HELPER_HPP
 
 extern "C" {
 #include <libavfilter/avfilter.h>
 }
 
-#include "IndexMap.h"
+#include "IndexMap.hpp"
 
 inline AVFilter* getFilter(jlong pointer)
 {
@@ -37,4 +37,4 @@ inline AVFilterInOut* getFilterInOut(jlong pointer)
     return reinterpret_cast<AVFilterInOut*>(pointer);
 }
 
-#endif //HELLOFFMPEG_AVFILTER_HELPER_H
+#endif //HELLOFFMPEG_AVFILTER_HELPER_HPP

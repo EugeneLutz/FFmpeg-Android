@@ -5,8 +5,8 @@ extern "C" {
 #include <libswscale/swscale.h>
 }
 
-#include "util.h"
-#include "opaque_iterator.h"
+#include "util.hpp"
+#include "opaque_iterator.hpp"
 
 
 static SwsFilter* getFilter(jlong pointer)

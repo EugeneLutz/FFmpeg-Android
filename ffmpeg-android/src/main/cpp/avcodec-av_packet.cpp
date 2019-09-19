@@ -5,7 +5,7 @@ extern "C" {
 #include <libavcodec/avcodec.h>
 }
 
-#include "util.h"
+#include "util.hpp"
 
 
 JNI_FUNCTION(jlong, avcodec_AVPacket, createNative)(JNIEnv*, jclass)

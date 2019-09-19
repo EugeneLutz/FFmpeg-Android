@@ -5,8 +5,8 @@ extern "C" {
 #include <libavutil/avutil.h>
 }
 
-#include "util.h"
-#include "avutil-helper.h"
+#include "util.hpp"
+#include "avutil-helper.hpp"
 
 
 JNI_FUNCTION(jstring, avutil_AVUtil, getMediaTypeStringNative)(JNIEnv* env, jclass, jlong index)

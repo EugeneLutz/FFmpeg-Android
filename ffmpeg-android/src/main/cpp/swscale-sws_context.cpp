@@ -5,7 +5,7 @@ extern "C" {
 #include <libswscale/swscale.h>
 }
 
-#include "util.h"
+#include "util.hpp"
 
 
 static SwsContext* getContext(jlong pointer)

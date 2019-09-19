@@ -5,9 +5,9 @@ extern "C" {
 #include <libavutil/dict.h>
 }
 
-#include "cstruct_wrapper.h"
-#include "util.h"
-#include "avutil-helper.h"
+#include "cstruct_wrapper.hpp"
+#include "util.hpp"
+#include "avutil-helper.hpp"
 
 
 JNI_FUNCTION(jlong, avutil_AVDictionary, getNative)(JNIEnv* env, jclass,

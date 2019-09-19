@@ -5,9 +5,9 @@ extern "C" {
 #include <libavformat/avio.h>
 }
 
-#include "util.h"
-#include "cstruct_wrapper.h"
-#include "avformat-helper.h"
+#include "util.hpp"
+#include "cstruct_wrapper.hpp"
+#include "avformat-helper.hpp"
 
 
 JNI_FUNCTION(void, avformat_AVIOContext, openNative)(JNIEnv* env, jclass, jobject result, jstring path, jint flags)

@@ -5,7 +5,7 @@ extern "C" {
 #include <libswscale/swscale.h>
 }
 
-#include "util.h"
+#include "util.hpp"
 
 
 JNI_FUNCTION(jint, swscale_SwScale, getVersionNative)(JNIEnv*, jclass)

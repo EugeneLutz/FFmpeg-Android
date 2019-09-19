@@ -5,8 +5,8 @@ extern "C" {
 #include <libavfilter/avfilter.h>
 }
 
-#include "util.h"
-#include "avfilter-helper.h"
+#include "util.hpp"
+#include "avfilter-helper.hpp"
 
 
 JNI_FUNCTION(jlong, avfilter_AVFilterInOut, allocNative)(JNIEnv* env, jclass, jstring jname, jlong jcontext, jint jpadIndex)

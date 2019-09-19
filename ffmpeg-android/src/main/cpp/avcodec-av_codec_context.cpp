@@ -5,9 +5,9 @@ extern "C" {
 #include <libavcodec/avcodec.h>
 }
 
-#include "util.h"
-#include "avcodec-helper.h"
-#include "avutil-helper.h"
+#include "util.hpp"
+#include "avcodec-helper.hpp"
+#include "avutil-helper.hpp"
 
 
 JNI_FUNCTION(void, avcodec_AVCodecContext, freeNative)(JNIEnv*, jclass, jlong pointer)

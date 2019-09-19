@@ -1,12 +1,12 @@
-#ifndef HELLOFFMPEG_AVCODEC_HELPER_H
-#define HELLOFFMPEG_AVCODEC_HELPER_H
+#ifndef HELLOFFMPEG_AVCODEC_HELPER_HPP
+#define HELLOFFMPEG_AVCODEC_HELPER_HPP
 
 extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavutil/mathematics.h>
 }
 
-#include "IndexMap.h"
+#include "IndexMap.hpp"
 
 inline AVCodecContext* getContext(jlong pointer)
 {
@@ -31,4 +31,4 @@ inline AVPacket* getPacket(jlong pointer)
 long AVCodecIDToLong(AVCodecID codec);
 AVCodecID longToAVCodecID(long value);
 
-#endif //HELLOFFMPEG_AVCODEC_HELPER_H
+#endif //HELLOFFMPEG_AVCODEC_HELPER_HPP

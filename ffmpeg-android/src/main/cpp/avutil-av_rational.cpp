@@ -5,7 +5,7 @@ extern "C" {
 #include <libavformat/avformat.h>
 }
 
-#include "util.h"
+#include "util.hpp"
 
 
 static AVRational* getRational(jlong pointer)

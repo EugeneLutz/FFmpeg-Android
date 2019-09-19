@@ -6,7 +6,7 @@ extern "C" {
 #include <libswresample/swresample.h>
 }
 
-#include "util.h"
+#include "util.hpp"
 
 
 static SwrContext* getContext(jlong pointer)

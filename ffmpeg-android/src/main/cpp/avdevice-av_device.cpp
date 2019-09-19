@@ -5,9 +5,9 @@ extern "C" {
 #include <libavdevice/avdevice.h>
 }
 
-#include "util.h"
-#include "opaque_iterator.h"
-#include "avdevice-helper.h"
+#include "util.hpp"
+#include "opaque_iterator.hpp"
+#include "avdevice-helper.hpp"
 
 
 static AVFormatContext* getFormatContext(jlong pointer)

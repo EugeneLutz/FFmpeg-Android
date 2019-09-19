@@ -7,7 +7,7 @@ extern "C" {
 #include <libavutil/mathematics.h>
 }
 
-#include "util.h"
+#include "util.hpp"
 
 static void log_packet(const AVFormatContext *fmt_ctx, const AVPacket *pkt, const char *tag)
 {

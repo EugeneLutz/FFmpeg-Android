@@ -5,8 +5,8 @@ extern "C" {
 #include <libavutil/log.h>
 }
 
-#include "util.h"
-#include "avutil-helper.h"
+#include "util.hpp"
+#include "avutil-helper.hpp"
 
 
 JNI_FUNCTION(jstring, avutil_AVClass, getClassNameNative)(JNIEnv* env, jclass, jlong pointer)

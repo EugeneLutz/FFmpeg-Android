@@ -1,5 +1,5 @@
-#ifndef HELLOFFMPEG_AVUTIL_HELPER_H
-#define HELLOFFMPEG_AVUTIL_HELPER_H
+#ifndef HELLOFFMPEG_AVUTIL_HELPER_HPP
+#define HELLOFFMPEG_AVUTIL_HELPER_HPP
 
 extern "C" {
 #include <libavutil/frame.h>
@@ -8,7 +8,7 @@ extern "C" {
 #include <libavutil/dict.h>
 }
 
-#include "IndexMap.h"
+#include "IndexMap.hpp"
 
 inline AVFrame* getFrame(jlong pointer)
 {
@@ -39,4 +39,7 @@ AVMediaType longToAVMediaType(long index);
 long AVPixelFormatToLong(AVPixelFormat pixelFormat);
 AVPixelFormat longToAVPixelFormat(long index);
 
-#endif //HELLOFFMPEG_AVUTIL_HELPER_H
+long AVColorPrimariesToLong(AVColorPrimaries colorPrimaries);
+AVColorPrimaries longToAVColorPrimaries(long index);
+
+#endif //HELLOFFMPEG_AVUTIL_HELPER_HPP

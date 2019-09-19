@@ -6,7 +6,7 @@ extern "C" {
 #include <libavformat/avio.h>
 }
 
-#include "util.h"
+#include "util.hpp"
 
 
 /* * * * * * * * * * * * * * * * * * * *

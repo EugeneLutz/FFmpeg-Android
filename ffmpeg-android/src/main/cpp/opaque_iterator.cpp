@@ -1,7 +1,7 @@
 #include <jni.h>
 #include <string>
-#include "util.h"
-#include "opaque_iterator.h"
+#include "util.hpp"
+#include "opaque_iterator.hpp"
 
 OpaqueIterator::OpaqueIterator()
 {

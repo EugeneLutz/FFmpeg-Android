@@ -5,8 +5,8 @@ extern "C" {
 #include <libavutil/frame.h>
 }
 
-#include "util.h"
-#include "avutil-helper.h"
+#include "util.hpp"
+#include "avutil-helper.hpp"
 
 
 JNI_FUNCTION(jobject, avutil_AVFrame, getDataNative)(JNIEnv* env, jclass, jlong pointer, jint planeIndex)

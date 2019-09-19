@@ -11,6 +11,7 @@ public class AVUtilHelper
 	private static ArrayList<IndexMap<AVRounding>> roundingMap;
 	private static ArrayList<IndexMap<AVMediaType>> mediaTypeMap;
 	private static ArrayList<IndexMap<AVPixelFormat>> pixelFormatMap;
+	private static ArrayList<IndexMap<AVColorPrimaries>> colorPrimariesMap;
 
 	static {
 		classCategoryMap = new ArrayList<>();
@@ -243,6 +244,22 @@ public class AVUtilHelper
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_YUVA444P12LE, 190));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_NV24, 191));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_NV42, 192));
+
+		colorPrimariesMap = new ArrayList<>();
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_RESERVED0, 1));
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_BT709, 2));
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_UNSPECIFIED, 3));
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_RESERVED, 4));
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_BT470M, 5));
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_BT470BG, 6));
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_SMPTE170M, 7));
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_SMPTE240M, 8));
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_FILM, 9));
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_BT2020, 10));
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_SMPTE428, 11));
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_SMPTE431, 12));
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_SMPTE432, 13));
+		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_JEDEC_P22, 14));
 	}
 
 
@@ -289,5 +306,17 @@ public class AVUtilHelper
 	public static AVPixelFormat longToAVPixelFormat(long value)
 	{
 		return IndexMap.getValueByIndex(pixelFormatMap, value);
+	}
+
+
+
+	public static long AVColorPrimariesToLong(AVColorPrimaries colorPrimaries)
+	{
+		return IndexMap.getIndexByValue(colorPrimariesMap, colorPrimaries);
+	}
+
+	public static AVColorPrimaries longToAVColorPrimaries(long value)
+	{
+		return IndexMap.getValueByIndex(colorPrimariesMap, value);
 	}
 }

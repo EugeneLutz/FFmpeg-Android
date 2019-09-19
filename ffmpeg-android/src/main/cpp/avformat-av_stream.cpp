@@ -5,7 +5,7 @@ extern "C" {
 #include <libavformat/avformat.h>
 }
 
-#include "util.h"
+#include "util.hpp"
 
 
 JNI_FUNCTION(jlong, avformat_AVStream, getCodecParametersNative)(JNIEnv*, jclass, jlong pointer)

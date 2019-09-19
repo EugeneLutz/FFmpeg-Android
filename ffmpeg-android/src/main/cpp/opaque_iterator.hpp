@@ -1,8 +1,8 @@
-#ifndef HELLOFFMPEG_OPAQUE_ITERATOR_H
-#define HELLOFFMPEG_OPAQUE_ITERATOR_H
+#ifndef HELLOFFMPEG_OPAQUE_ITERATOR_HPP
+#define HELLOFFMPEG_OPAQUE_ITERATOR_HPP
 
 #include <jni.h>
-#include "util.h"
+#include "util.hpp"
 
 class OpaqueIterator
 {
@@ -16,4 +16,4 @@ private:
     void* opaque;
 };
 
-#endif //HELLOFFMPEG_OPAQUE_ITERATOR_H
+#endif //HELLOFFMPEG_OPAQUE_ITERATOR_HPP

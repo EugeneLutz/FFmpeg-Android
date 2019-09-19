@@ -1,5 +1,5 @@
-#ifndef HELLOFFMPEG_AVDEVICE_HELPER_H
-#define HELLOFFMPEG_AVDEVICE_HELPER_H
+#ifndef HELLOFFMPEG_AVDEVICE_HELPER_HPP
+#define HELLOFFMPEG_AVDEVICE_HELPER_HPP
 
 extern "C" {
 #include <libavdevice/avdevice.h>
@@ -17,4 +17,4 @@ inline AVDeviceInfo* getDeviceInfo(jlong pointer)
     return reinterpret_cast<AVDeviceInfo*>(pointer);
 }
 
-#endif //HELLOFFMPEG_AVDEVICE_HELPER_H
+#endif //HELLOFFMPEG_AVDEVICE_HELPER_HPP

@@ -5,7 +5,7 @@ extern "C" {
 #include <libavutil/mathematics.h>
 }
 
-#include "util.h"
+#include "util.hpp"
 
 
 JNI_FUNCTION(jlong, avutil_Mathematics, rescaleQRNDNative)(JNIEnv*, jclass, jlong a, jlong bqPointer, jlong cqPointer, jint flags)

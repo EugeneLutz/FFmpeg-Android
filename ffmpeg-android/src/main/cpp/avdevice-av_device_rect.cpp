@@ -5,8 +5,8 @@ extern "C" {
 #include <libavdevice/avdevice.h>
 }
 
-#include "util.h"
-#include "avdevice-helper.h"
+#include "util.hpp"
+#include "avdevice-helper.hpp"
 
 
 JNI_FUNCTION(jint, avdevice_AVDeviceRect, getXNative)(JNIEnv*, jclass, jlong pointer)

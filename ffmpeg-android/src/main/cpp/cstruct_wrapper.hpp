@@ -1,8 +1,8 @@
-#ifndef HELLOFFMPEG_CSTRUCT_WRAPPER_H
-#define HELLOFFMPEG_CSTRUCT_WRAPPER_H
+#ifndef HELLOFFMPEG_CSTRUCT_WRAPPER_HPP
+#define HELLOFFMPEG_CSTRUCT_WRAPPER_HPP
 
 #include <jni.h>
-#include "util.h"
+#include "util.hpp"
 
 
 class JavaClass
@@ -116,4 +116,4 @@ private:
 };
 
 
-#endif //HELLOFFMPEG_CSTRUCT_WRAPPER_H
+#endif //HELLOFFMPEG_CSTRUCT_WRAPPER_HPP

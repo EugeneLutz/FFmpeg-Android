@@ -1,5 +1,5 @@
-#ifndef HELLOFFMPEG_INDEXMAP_H
-#define HELLOFFMPEG_INDEXMAP_H
+#ifndef HELLOFFMPEG_INDEXMAP_HPP
+#define HELLOFFMPEG_INDEXMAP_HPP
 
 #include <vector>
 
@@ -44,4 +44,4 @@ private:
     long index;
 };
 
-#endif //HELLOFFMPEG_INDEXMAP_H
+#endif //HELLOFFMPEG_INDEXMAP_HPP

@@ -5,8 +5,8 @@ extern "C" {
 #include <libavcodec/avcodec.h>
 }
 
-#include "util.h"
-#include "avcodec-helper.h"
+#include "util.hpp"
+#include "avcodec-helper.hpp"
 
 
 static std::vector<IndexMap<AVCodecID>> codecMap {

@@ -1,5 +1,5 @@
-#ifndef HELLOFFMPEG_UTIL_H
-#define HELLOFFMPEG_UTIL_H
+#ifndef HELLOFFMPEG_UTIL_HPP
+#define HELLOFFMPEG_UTIL_HPP
 
 
 #include <jni.h>
@@ -72,4 +72,4 @@ inline char* getRawCharData(jlong pointer)
 }
 
 
-#endif //HELLOFFMPEG_UTIL_H
+#endif //HELLOFFMPEG_UTIL_HPP

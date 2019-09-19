@@ -5,8 +5,8 @@ extern "C" {
 #include <libavfilter/avfilter.h>
 }
 
-#include "util.h"
-#include "opaque_iterator.h"
+#include "util.hpp"
+#include "opaque_iterator.hpp"
 
 
 JNI_FUNCTION(jint, avfilter_AVFilter, getVersionNative)(JNIEnv*, jclass)
