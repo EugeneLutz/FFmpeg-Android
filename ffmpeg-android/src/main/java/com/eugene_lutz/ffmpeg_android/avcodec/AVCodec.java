@@ -3,6 +3,7 @@ package com.eugene_lutz.ffmpeg_android.avcodec;
 import com.eugene_lutz.ffmpeg_android.CStructWrapper;
 import com.eugene_lutz.ffmpeg_android.FFmpegAndroid;
 import com.eugene_lutz.ffmpeg_android.avutil.AVMediaType;
+import com.eugene_lutz.ffmpeg_android.avutil.AVPixelFormat;
 import com.eugene_lutz.ffmpeg_android.avutil.AVUtilHelper;
 
 public class AVCodec extends CStructWrapper
@@ -333,6 +334,35 @@ public class AVCodec extends CStructWrapper
 		return getNumSupportedFrameratesNative(pointer);
 	}
 
+	/**
+	 * Returns whether number of supported pixel formats is known.
+	 * @return Whether number of supported pixel formats is known.
+	 */
+	public boolean getNumSupportedPixelFormatsIsKnown()
+	{
+		return getNumSupportedPixelFormatsNative(pointer) != 0;
+	}
+
+	/**
+	 * Returns number of supported pixel formats.
+	 * @return Number of supported pixel formats.
+	 */
+	public int getNumSupportedPixelFormats()
+	{
+		return getNumSupportedPixelFormatsNative(pointer);
+	}
+
+	/**
+	 * Returns supported pixel format from list by index.
+	 * @param index Index in list.
+	 * @return Supported pixel format.
+	 */
+	public AVPixelFormat getSupportedPixelFormat(int index)
+	{
+		final long formatIndex = getSupportedPixelFormatNative(pointer, index);
+		return AVUtilHelper.longToAVPixelFormat(formatIndex);
+	}
+
 	//endregion
 
 
@@ -351,6 +381,9 @@ public class AVCodec extends CStructWrapper
 	private static native long getCodecIdNative(long pointer);
 	private static native int getCodecCapabilitiesNative(long pointer);
 	private static native int getNumSupportedFrameratesNative(long pointer);
+	// private static native long getSupportedFrameNative(long pointer, int index);
+	private static native int getNumSupportedPixelFormatsNative(long pointer);
+	private static native long getSupportedPixelFormatNative(long pointer, int index);
 
 	private static native String getCodecGroupNameNative(long pointer);
 

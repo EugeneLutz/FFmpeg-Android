@@ -116,6 +116,35 @@ JNI_FUNCTION(jint, avcodec_AVCodec, getNumSupportedFrameratesNative)(JNIEnv*, jc
 }
 
 
+JNI_FUNCTION(jint, avcodec_AVCodec, getNumSupportedPixelFormatsNative)(JNIEnv*, jclass, jlong pointer)
+{
+    auto codec = getCodec(pointer);
+    auto numSupportedPixelformats = 0;
+    if (codec->pix_fmts == nullptr)
+    {
+        return 0;
+    }
+
+    while (codec->pix_fmts[numSupportedPixelformats] != -1)
+    {
+        numSupportedPixelformats++;
+    }
+
+    return tojint(numSupportedPixelformats);
+}
+
+
+JNI_FUNCTION(jlong, avcodec_AVCodec, getSupportedPixelFormatNative)(JNIEnv*, jclass, jlong pointer, jint jindex)
+{
+    auto codec = getCodec(pointer);
+    auto index = tojint(jindex);
+    auto format = codec->pix_fmts[index];
+    auto formatIndex = AVPixelFormatToLong(format);
+
+    return tojlong(formatIndex);
+}
+
+
 JNI_FUNCTION(jstring, avcodec_AVCodec, getCodecGroupNameNative)(JNIEnv* env, jclass, jlong pointer)
 {
     auto codec = getCodec(pointer);

@@ -31,9 +31,12 @@ inline AVClass* getClass(jlong pointer)
 }
 
 long AVRoundingToLong(AVRounding rounding);
-AVRounding longToAVRounding(long value);
+AVRounding longToAVRounding(long index);
 
 long AVMediaTypeToLong(AVMediaType mediaType);
-AVMediaType longToAVMediaType(long value);
+AVMediaType longToAVMediaType(long index);
+
+long AVPixelFormatToLong(AVPixelFormat pixelFormat);
+AVPixelFormat longToAVPixelFormat(long index);
 
 #endif //HELLOFFMPEG_AVUTIL_HELPER_H
