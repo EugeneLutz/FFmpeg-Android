@@ -27,12 +27,8 @@ JNI_FUNCTION(jint, avcodec_AVCodecParameters, getCodecTypeNative)(JNIEnv*, jclas
         return 0;
     }
 
-    // TODO: codecParameters->codec_type to index
-
     auto typeIndex = AVMediaTypeToLong(codecParameters->codec_type);
     return jint(typeIndex);
-
-    return jint(codecParameters->codec_type);
 }
 
 JNI_FUNCTION(void, avcodec_AVCodecParameters, setCodecTagNative)(JNIEnv*, jclass, jlong pointer, jint tag)
