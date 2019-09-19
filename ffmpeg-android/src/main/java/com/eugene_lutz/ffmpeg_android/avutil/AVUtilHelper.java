@@ -12,6 +12,10 @@ public class AVUtilHelper
 	private static ArrayList<IndexMap<AVMediaType>> mediaTypeMap;
 	private static ArrayList<IndexMap<AVPixelFormat>> pixelFormatMap;
 	private static ArrayList<IndexMap<AVColorPrimaries>> colorPrimariesMap;
+	private static ArrayList<IndexMap<AVColorTransferCharacteristic>> colorTransferCharacteristicMap;
+	private static ArrayList<IndexMap<AVColorSpace>> colorSpaceMap;
+	private static ArrayList<IndexMap<AVColorRange>> colorRangeMap;
+	private static ArrayList<IndexMap<AVChromaLocation>> chromaLocationMap;
 
 	static {
 		classCategoryMap = new ArrayList<>();
@@ -97,7 +101,7 @@ public class AVUtilHelper
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_BGR565LE, 43));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_BGR555BE, 44));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_BGR555LE, 45));
-		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_VAAPI, 46));
+		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_VAAPI_VLD, 46));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_YUV420P16LE, 47));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_YUV420P16BE, 48));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_YUV422P16LE, 49));
@@ -109,7 +113,7 @@ public class AVUtilHelper
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_RGB444BE, 55));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_BGR444LE, 56));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_BGR444BE, 57));
-		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_YA8, 58));
+		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_YA8_Y400A_GRAY8A, 58));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_BGR48BE, 59));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_BGR48LE, 60));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_YUV420P9BE, 61));
@@ -124,7 +128,7 @@ public class AVUtilHelper
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_YUV444P10LE, 70));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_YUV422P9BE, 71));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_YUV422P9LE, 72));
-		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_GBRP, 73));
+		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_GBRP_GBR24P, 73));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_GBRP9BE, 74));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_GBRP9LE, 75));
 		pixelFormatMap.add(new IndexMap<>(AVPixelFormat.AV_PIX_FMT_GBRP10BE, 76));
@@ -260,6 +264,58 @@ public class AVUtilHelper
 		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_SMPTE431, 12));
 		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_SMPTE432, 13));
 		colorPrimariesMap.add(new IndexMap<>(AVColorPrimaries.AVCOL_PRI_JEDEC_P22, 14));
+
+		colorTransferCharacteristicMap = new ArrayList<>();
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_RESERVED0, 1));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_BT709, 2));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_UNSPECIFIED, 3));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_RESERVED, 4));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_GAMMA22, 5));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_GAMMA28, 6));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_SMPTE170M, 7));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_SMPTE240M, 8));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_LINEAR, 9));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_LOG, 10));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_LOG_SQRT, 11));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_IEC61966_2_4, 12));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_BT1361_ECG, 13));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_IEC61966_2_1, 14));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_BT2020_10, 15));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_BT2020_12, 16));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_SMPTE2084, 17));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_SMPTE428, 18));
+		colorTransferCharacteristicMap.add(new IndexMap<>(AVColorTransferCharacteristic.AVCOL_TRC_ARIB_STD_B67, 19));
+
+		colorSpaceMap = new ArrayList<>();
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_RGB, 1));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_BT709, 2));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_UNSPECIFIED, 3));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_RESERVED, 4));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_FCC, 5));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_BT470BG, 6));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_SMPTE170M, 7));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_SMPTE240M, 8));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_YCGCO_YCOCG, 9));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_BT2020_NCL, 10));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_BT2020_CL, 11));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_SMPTE2085, 12));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_CHROMA_DERIVED_NCL, 13));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_CHROMA_DERIVED_CL, 14));
+		colorSpaceMap.add(new IndexMap<>(AVColorSpace.AVCOL_SPC_ICTCP, 15));
+
+		colorRangeMap = new ArrayList<>();
+		colorRangeMap.add(new IndexMap<>(AVColorRange.AVCOL_RANGE_UNSPECIFIED, 1));
+		colorRangeMap.add(new IndexMap<>(AVColorRange.AVCOL_RANGE_MPEG, 2));
+		colorRangeMap.add(new IndexMap<>(AVColorRange.AVCOL_RANGE_JPEG, 3));
+
+		chromaLocationMap = new ArrayList<>();
+		chromaLocationMap.add(new IndexMap<>(AVChromaLocation.AVCHROMA_LOC_UNSPECIFIED, 1));
+		chromaLocationMap.add(new IndexMap<>(AVChromaLocation.AVCHROMA_LOC_LEFT, 2));
+		chromaLocationMap.add(new IndexMap<>(AVChromaLocation.AVCHROMA_LOC_CENTER, 3));
+		chromaLocationMap.add(new IndexMap<>(AVChromaLocation.AVCHROMA_LOC_TOPLEFT, 4));
+		chromaLocationMap.add(new IndexMap<>(AVChromaLocation.AVCHROMA_LOC_TOP, 5));
+		chromaLocationMap.add(new IndexMap<>(AVChromaLocation.AVCHROMA_LOC_BOTTOMLEFT, 6));
+		chromaLocationMap.add(new IndexMap<>(AVChromaLocation.AVCHROMA_LOC_BOTTOM, 7));
 	}
 
 
@@ -318,5 +374,53 @@ public class AVUtilHelper
 	public static AVColorPrimaries longToAVColorPrimaries(long value)
 	{
 		return IndexMap.getValueByIndex(colorPrimariesMap, value);
+	}
+
+
+
+	public static long AVColorTransferCharacteristicToLong(AVColorTransferCharacteristic colorTransferCharacteristic)
+	{
+		return IndexMap.getIndexByValue(colorTransferCharacteristicMap, colorTransferCharacteristic);
+	}
+
+	public static AVColorTransferCharacteristic longToAVColorTransferCharacteristic(long value)
+	{
+		return IndexMap.getValueByIndex(colorTransferCharacteristicMap, value);
+	}
+
+
+
+	public static long AVColorSpaceToLong(AVColorSpace colorSpace)
+	{
+		return IndexMap.getIndexByValue(colorSpaceMap, colorSpace);
+	}
+
+	public static AVColorSpace longToAVColorSpace(long value)
+	{
+		return IndexMap.getValueByIndex(colorSpaceMap, value);
+	}
+
+
+
+	public static long AVColorRangeToLong(AVColorRange colorRange)
+	{
+		return IndexMap.getIndexByValue(colorRangeMap, colorRange);
+	}
+
+	public static AVColorRange longToAVColorRange(long value)
+	{
+		return IndexMap.getValueByIndex(colorRangeMap, value);
+	}
+
+
+
+	public static long AVChromaLocationToLong(AVChromaLocation chromaLocation)
+	{
+		return IndexMap.getIndexByValue(chromaLocationMap, chromaLocation);
+	}
+
+	public static AVChromaLocation longToAVChromaLocation(long value)
+	{
+		return IndexMap.getValueByIndex(chromaLocationMap, value);
 	}
 }

@@ -305,6 +305,7 @@ AVPixelFormat longToAVPixelFormat(long value)
 }
 
 
+
 static std::vector<IndexMap<AVColorPrimaries>> colorPrimariesMap;
 static bool _colorPrimariesInitialized = false;
 static void initializeColorPrimariesMap()
@@ -346,6 +347,174 @@ AVColorPrimaries longToAVColorPrimaries(long value)
     }
 
     return IndexMap<AVColorPrimaries>::GetValueByIndex(colorPrimariesMap, value);
+}
+
+
+
+static std::vector<IndexMap<AVColorTransferCharacteristic>> colorTransterCharacteristicsMap;
+static bool _colorTransterCharacteristicsInitialized = false;
+static void initializecolorTransterCharacteristicsMap()
+{
+    colorTransterCharacteristicsMap.clear();
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_RESERVED0, 1);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_BT709, 2);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_UNSPECIFIED, 3);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_RESERVED, 4);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_GAMMA22, 5);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_GAMMA28, 6);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_SMPTE170M, 7);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_SMPTE240M, 8);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_LINEAR, 9);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_LOG, 10);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_LOG_SQRT, 11);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_IEC61966_2_4, 12);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_BT1361_ECG, 13);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_IEC61966_2_1, 14);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_BT2020_10, 15);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_BT2020_12, 16);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_SMPTE2084, 17);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_SMPTE428, 18);
+    colorTransterCharacteristicsMap.emplace_back(AVCOL_TRC_ARIB_STD_B67, 19);
+
+    _colorTransterCharacteristicsInitialized = true;
+}
+
+long AVColorTransferCharacteristicToLong(AVColorTransferCharacteristic colorTransterCharacteristics)
+{
+    if (!_colorTransterCharacteristicsInitialized)
+    {
+        initializecolorTransterCharacteristicsMap();
+    }
+
+    return IndexMap<AVColorTransferCharacteristic>::GetIndexByValue(colorTransterCharacteristicsMap, colorTransterCharacteristics);
+}
+
+AVColorTransferCharacteristic longToAVColorTransferCharacteristic(long value)
+{
+    if (!_colorTransterCharacteristicsInitialized)
+    {
+        initializecolorTransterCharacteristicsMap();
+    }
+
+    return IndexMap<AVColorTransferCharacteristic>::GetValueByIndex(colorTransterCharacteristicsMap, value);
+}
+
+
+
+static std::vector<IndexMap<AVColorSpace>> colorSpaceMap;
+static bool _colorSpaceInitialized = false;
+static void initializecolorSpaceMap()
+{
+    colorSpaceMap.clear();
+    colorSpaceMap.emplace_back(AVCOL_SPC_RGB, 1);
+    colorSpaceMap.emplace_back(AVCOL_SPC_BT709, 2);
+    colorSpaceMap.emplace_back(AVCOL_SPC_UNSPECIFIED, 3);
+    colorSpaceMap.emplace_back(AVCOL_SPC_RESERVED, 4);
+    colorSpaceMap.emplace_back(AVCOL_SPC_FCC, 5);
+    colorSpaceMap.emplace_back(AVCOL_SPC_BT470BG, 6);
+    colorSpaceMap.emplace_back(AVCOL_SPC_SMPTE170M, 7);
+    colorSpaceMap.emplace_back(AVCOL_SPC_SMPTE240M, 8);
+    colorSpaceMap.emplace_back(AVCOL_SPC_YCGCO, 9);
+    colorSpaceMap.emplace_back(AVCOL_SPC_BT2020_NCL, 10);
+    colorSpaceMap.emplace_back(AVCOL_SPC_BT2020_CL, 11);
+    colorSpaceMap.emplace_back(AVCOL_SPC_SMPTE2085, 12);
+    colorSpaceMap.emplace_back(AVCOL_SPC_CHROMA_DERIVED_NCL, 13);
+    colorSpaceMap.emplace_back(AVCOL_SPC_CHROMA_DERIVED_CL, 14);
+    colorSpaceMap.emplace_back(AVCOL_SPC_ICTCP, 15);
+
+    _colorSpaceInitialized = true;
+}
+
+long AVColorSpaceToLong(AVColorSpace colorSpace)
+{
+    if (!_colorSpaceInitialized)
+    {
+        initializecolorSpaceMap();
+    }
+
+    return IndexMap<AVColorSpace>::GetIndexByValue(colorSpaceMap, colorSpace);
+}
+
+AVColorSpace longToAVColorSpace(long value)
+{
+    if (!_colorSpaceInitialized)
+    {
+        initializecolorSpaceMap();
+    }
+
+    return IndexMap<AVColorSpace>::GetValueByIndex(colorSpaceMap, value);
+}
+
+
+
+static std::vector<IndexMap<AVColorRange>> colorRangeMap;
+static bool _colorRangeInitialized = false;
+static void initializecolorRangeMap()
+{
+    colorRangeMap.clear();
+    colorRangeMap.emplace_back(AVCOL_RANGE_UNSPECIFIED, 1);
+    colorRangeMap.emplace_back(AVCOL_RANGE_MPEG, 2);
+    colorRangeMap.emplace_back(AVCOL_RANGE_JPEG, 3);
+
+    _colorRangeInitialized = true;
+}
+
+long AVColorRangeToLong(AVColorRange colorRange)
+{
+    if (!_colorRangeInitialized)
+    {
+        initializecolorRangeMap();
+    }
+
+    return IndexMap<AVColorRange>::GetIndexByValue(colorRangeMap, colorRange);
+}
+
+AVColorRange longToAVColorRange(long value)
+{
+    if (!_colorRangeInitialized)
+    {
+        initializecolorRangeMap();
+    }
+
+    return IndexMap<AVColorRange>::GetValueByIndex(colorRangeMap, value);
+}
+
+
+
+static std::vector<IndexMap<AVChromaLocation>> chromaLocationMap;
+static bool _chromaLocationInitialized = false;
+static void initializechromaLocationMap()
+{
+    chromaLocationMap.clear();
+    chromaLocationMap.emplace_back(AVCHROMA_LOC_UNSPECIFIED, 1);
+    chromaLocationMap.emplace_back(AVCHROMA_LOC_LEFT, 2);
+    chromaLocationMap.emplace_back(AVCHROMA_LOC_CENTER, 3);
+    chromaLocationMap.emplace_back(AVCHROMA_LOC_TOPLEFT, 4);
+    chromaLocationMap.emplace_back(AVCHROMA_LOC_TOP, 5);
+    chromaLocationMap.emplace_back(AVCHROMA_LOC_BOTTOMLEFT, 6);
+    chromaLocationMap.emplace_back(AVCHROMA_LOC_BOTTOM, 7);
+
+    _chromaLocationInitialized = true;
+}
+
+long AVChromaLocationToLong(AVChromaLocation chromaLocation)
+{
+    if (!_chromaLocationInitialized)
+    {
+        initializechromaLocationMap();
+    }
+
+    return IndexMap<AVChromaLocation>::GetIndexByValue(chromaLocationMap, chromaLocation);
+}
+
+AVChromaLocation longToAVChromaLocation(long value)
+{
+    if (!_chromaLocationInitialized)
+    {
+        initializechromaLocationMap();
+    }
+
+    return IndexMap<AVChromaLocation>::GetValueByIndex(chromaLocationMap, value);
 }
 
 #pragma clang diagnostic pop

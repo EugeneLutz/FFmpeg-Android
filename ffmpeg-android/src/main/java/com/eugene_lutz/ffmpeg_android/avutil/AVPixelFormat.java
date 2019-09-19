@@ -82,7 +82,7 @@ public enum AVPixelFormat {
 	 *  Hardware acceleration through VA-API, data[3] contains a
 	 *  VASurfaceID.
 	 */
-	AV_PIX_FMT_VAAPI,
+	AV_PIX_FMT_VAAPI_VLD,
 
 	AV_PIX_FMT_YUV420P16LE,  ///< planar YUV 4:2:0, 24bpp, (1 Cr & Cb sample per 2x2 Y samples), little-endian
 	AV_PIX_FMT_YUV420P16BE,  ///< planar YUV 4:2:0, 24bpp, (1 Cr & Cb sample per 2x2 Y samples), big-endian
@@ -96,10 +96,7 @@ public enum AVPixelFormat {
 	AV_PIX_FMT_RGB444BE,  ///< packed RGB 4:4:4, 16bpp, (msb)4X 4R 4G 4B(lsb), big-endian,    X=unused/undefined
 	AV_PIX_FMT_BGR444LE,  ///< packed BGR 4:4:4, 16bpp, (msb)4X 4B 4G 4R(lsb), little-endian, X=unused/undefined
 	AV_PIX_FMT_BGR444BE,  ///< packed BGR 4:4:4, 16bpp, (msb)4X 4B 4G 4R(lsb), big-endian,    X=unused/undefined
-	AV_PIX_FMT_YA8,       ///< 8 bits gray, 8 bits alpha
-
-	//AV_PIX_FMT_Y400A = AV_PIX_FMT_YA8, ///< alias for AV_PIX_FMT_YA8
-	//AV_PIX_FMT_GRAY8A= AV_PIX_FMT_YA8, ///< alias for AV_PIX_FMT_YA8
+	AV_PIX_FMT_YA8_Y400A_GRAY8A,	///< 8 bits gray, 8 bits alpha
 
 	AV_PIX_FMT_BGR48BE,   ///< packed RGB 16:16:16, 48bpp, 16B, 16G, 16R, the 2-byte value for each R/G/B component is stored as big-endian
 	AV_PIX_FMT_BGR48LE,   ///< packed RGB 16:16:16, 48bpp, 16B, 16G, 16R, the 2-byte value for each R/G/B component is stored as little-endian
@@ -121,8 +118,7 @@ public enum AVPixelFormat {
 	AV_PIX_FMT_YUV444P10LE,///< planar YUV 4:4:4, 30bpp, (1 Cr & Cb sample per 1x1 Y samples), little-endian
 	AV_PIX_FMT_YUV422P9BE, ///< planar YUV 4:2:2, 18bpp, (1 Cr & Cb sample per 2x1 Y samples), big-endian
 	AV_PIX_FMT_YUV422P9LE, ///< planar YUV 4:2:2, 18bpp, (1 Cr & Cb sample per 2x1 Y samples), little-endian
-	AV_PIX_FMT_GBRP,      ///< planar GBR 4:4:4 24bpp
-	//AV_PIX_FMT_GBR24P = AV_PIX_FMT_GBRP, // alias for #AV_PIX_FMT_GBRP
+	AV_PIX_FMT_GBRP_GBR24P,      ///< planar GBR 4:4:4 24bpp
 	AV_PIX_FMT_GBRP9BE,   ///< planar GBR 4:4:4 27bpp, big-endian
 	AV_PIX_FMT_GBRP9LE,   ///< planar GBR 4:4:4 27bpp, little-endian
 	AV_PIX_FMT_GBRP10BE,  ///< planar GBR 4:4:4 30bpp, big-endian
@@ -190,71 +186,71 @@ public enum AVPixelFormat {
 	 */
 	AV_PIX_FMT_CUDA,
 
-	AV_PIX_FMT_0RGB,        ///< packed RGB 8:8:8, 32bpp, XRGBXRGB...   X=unused/undefined
-	AV_PIX_FMT_RGB0,        ///< packed RGB 8:8:8, 32bpp, RGBXRGBX...   X=unused/undefined
-	AV_PIX_FMT_0BGR,        ///< packed BGR 8:8:8, 32bpp, XBGRXBGR...   X=unused/undefined
-	AV_PIX_FMT_BGR0,        ///< packed BGR 8:8:8, 32bpp, BGRXBGRX...   X=unused/undefined
+	AV_PIX_FMT_0RGB,	///< packed RGB 8:8:8, 32bpp, XRGBXRGB...   X=unused/undefined
+	AV_PIX_FMT_RGB0,	///< packed RGB 8:8:8, 32bpp, RGBXRGBX...   X=unused/undefined
+	AV_PIX_FMT_0BGR,	///< packed BGR 8:8:8, 32bpp, XBGRXBGR...   X=unused/undefined
+	AV_PIX_FMT_BGR0,	///< packed BGR 8:8:8, 32bpp, BGRXBGRX...   X=unused/undefined
 
-	AV_PIX_FMT_YUV420P12BE, ///< planar YUV 4:2:0,18bpp, (1 Cr & Cb sample per 2x2 Y samples), big-endian
-	AV_PIX_FMT_YUV420P12LE, ///< planar YUV 4:2:0,18bpp, (1 Cr & Cb sample per 2x2 Y samples), little-endian
-	AV_PIX_FMT_YUV420P14BE, ///< planar YUV 4:2:0,21bpp, (1 Cr & Cb sample per 2x2 Y samples), big-endian
-	AV_PIX_FMT_YUV420P14LE, ///< planar YUV 4:2:0,21bpp, (1 Cr & Cb sample per 2x2 Y samples), little-endian
-	AV_PIX_FMT_YUV422P12BE, ///< planar YUV 4:2:2,24bpp, (1 Cr & Cb sample per 2x1 Y samples), big-endian
-	AV_PIX_FMT_YUV422P12LE, ///< planar YUV 4:2:2,24bpp, (1 Cr & Cb sample per 2x1 Y samples), little-endian
-	AV_PIX_FMT_YUV422P14BE, ///< planar YUV 4:2:2,28bpp, (1 Cr & Cb sample per 2x1 Y samples), big-endian
-	AV_PIX_FMT_YUV422P14LE, ///< planar YUV 4:2:2,28bpp, (1 Cr & Cb sample per 2x1 Y samples), little-endian
-	AV_PIX_FMT_YUV444P12BE, ///< planar YUV 4:4:4,36bpp, (1 Cr & Cb sample per 1x1 Y samples), big-endian
-	AV_PIX_FMT_YUV444P12LE, ///< planar YUV 4:4:4,36bpp, (1 Cr & Cb sample per 1x1 Y samples), little-endian
-	AV_PIX_FMT_YUV444P14BE, ///< planar YUV 4:4:4,42bpp, (1 Cr & Cb sample per 1x1 Y samples), big-endian
-	AV_PIX_FMT_YUV444P14LE, ///< planar YUV 4:4:4,42bpp, (1 Cr & Cb sample per 1x1 Y samples), little-endian
-	AV_PIX_FMT_GBRP12BE,    ///< planar GBR 4:4:4 36bpp, big-endian
-	AV_PIX_FMT_GBRP12LE,    ///< planar GBR 4:4:4 36bpp, little-endian
-	AV_PIX_FMT_GBRP14BE,    ///< planar GBR 4:4:4 42bpp, big-endian
-	AV_PIX_FMT_GBRP14LE,    ///< planar GBR 4:4:4 42bpp, little-endian
-	AV_PIX_FMT_YUVJ411P,    ///< planar YUV 4:1:1, 12bpp, (1 Cr & Cb sample per 4x1 Y samples) full scale (JPEG), deprecated in favor of AV_PIX_FMT_YUV411P and setting color_range
+	AV_PIX_FMT_YUV420P12BE,	///< planar YUV 4:2:0,18bpp, (1 Cr & Cb sample per 2x2 Y samples), big-endian
+	AV_PIX_FMT_YUV420P12LE,	///< planar YUV 4:2:0,18bpp, (1 Cr & Cb sample per 2x2 Y samples), little-endian
+	AV_PIX_FMT_YUV420P14BE,	///< planar YUV 4:2:0,21bpp, (1 Cr & Cb sample per 2x2 Y samples), big-endian
+	AV_PIX_FMT_YUV420P14LE,	///< planar YUV 4:2:0,21bpp, (1 Cr & Cb sample per 2x2 Y samples), little-endian
+	AV_PIX_FMT_YUV422P12BE,	///< planar YUV 4:2:2,24bpp, (1 Cr & Cb sample per 2x1 Y samples), big-endian
+	AV_PIX_FMT_YUV422P12LE,	///< planar YUV 4:2:2,24bpp, (1 Cr & Cb sample per 2x1 Y samples), little-endian
+	AV_PIX_FMT_YUV422P14BE,	///< planar YUV 4:2:2,28bpp, (1 Cr & Cb sample per 2x1 Y samples), big-endian
+	AV_PIX_FMT_YUV422P14LE,	///< planar YUV 4:2:2,28bpp, (1 Cr & Cb sample per 2x1 Y samples), little-endian
+	AV_PIX_FMT_YUV444P12BE,	///< planar YUV 4:4:4,36bpp, (1 Cr & Cb sample per 1x1 Y samples), big-endian
+	AV_PIX_FMT_YUV444P12LE,	///< planar YUV 4:4:4,36bpp, (1 Cr & Cb sample per 1x1 Y samples), little-endian
+	AV_PIX_FMT_YUV444P14BE,	///< planar YUV 4:4:4,42bpp, (1 Cr & Cb sample per 1x1 Y samples), big-endian
+	AV_PIX_FMT_YUV444P14LE,	///< planar YUV 4:4:4,42bpp, (1 Cr & Cb sample per 1x1 Y samples), little-endian
+	AV_PIX_FMT_GBRP12BE,	///< planar GBR 4:4:4 36bpp, big-endian
+	AV_PIX_FMT_GBRP12LE,	///< planar GBR 4:4:4 36bpp, little-endian
+	AV_PIX_FMT_GBRP14BE,	///< planar GBR 4:4:4 42bpp, big-endian
+	AV_PIX_FMT_GBRP14LE,	///< planar GBR 4:4:4 42bpp, little-endian
+	AV_PIX_FMT_YUVJ411P,	///< planar YUV 4:1:1, 12bpp, (1 Cr & Cb sample per 4x1 Y samples) full scale (JPEG), deprecated in favor of AV_PIX_FMT_YUV411P and setting color_range
 
-	AV_PIX_FMT_BAYER_BGGR8,    ///< bayer, BGBG..(odd line), GRGR..(even line), 8-bit samples */
-	AV_PIX_FMT_BAYER_RGGB8,    ///< bayer, RGRG..(odd line), GBGB..(even line), 8-bit samples */
-	AV_PIX_FMT_BAYER_GBRG8,    ///< bayer, GBGB..(odd line), RGRG..(even line), 8-bit samples */
-	AV_PIX_FMT_BAYER_GRBG8,    ///< bayer, GRGR..(odd line), BGBG..(even line), 8-bit samples */
-	AV_PIX_FMT_BAYER_BGGR16LE, ///< bayer, BGBG..(odd line), GRGR..(even line), 16-bit samples, little-endian */
-	AV_PIX_FMT_BAYER_BGGR16BE, ///< bayer, BGBG..(odd line), GRGR..(even line), 16-bit samples, big-endian */
-	AV_PIX_FMT_BAYER_RGGB16LE, ///< bayer, RGRG..(odd line), GBGB..(even line), 16-bit samples, little-endian */
-	AV_PIX_FMT_BAYER_RGGB16BE, ///< bayer, RGRG..(odd line), GBGB..(even line), 16-bit samples, big-endian */
-	AV_PIX_FMT_BAYER_GBRG16LE, ///< bayer, GBGB..(odd line), RGRG..(even line), 16-bit samples, little-endian */
-	AV_PIX_FMT_BAYER_GBRG16BE, ///< bayer, GBGB..(odd line), RGRG..(even line), 16-bit samples, big-endian */
-	AV_PIX_FMT_BAYER_GRBG16LE, ///< bayer, GRGR..(odd line), BGBG..(even line), 16-bit samples, little-endian */
-	AV_PIX_FMT_BAYER_GRBG16BE, ///< bayer, GRGR..(odd line), BGBG..(even line), 16-bit samples, big-endian */
+	AV_PIX_FMT_BAYER_BGGR8,		///< bayer, BGBG..(odd line), GRGR..(even line), 8-bit samples */
+	AV_PIX_FMT_BAYER_RGGB8,		///< bayer, RGRG..(odd line), GBGB..(even line), 8-bit samples */
+	AV_PIX_FMT_BAYER_GBRG8,		///< bayer, GBGB..(odd line), RGRG..(even line), 8-bit samples */
+	AV_PIX_FMT_BAYER_GRBG8,		///< bayer, GRGR..(odd line), BGBG..(even line), 8-bit samples */
+	AV_PIX_FMT_BAYER_BGGR16LE,	///< bayer, BGBG..(odd line), GRGR..(even line), 16-bit samples, little-endian */
+	AV_PIX_FMT_BAYER_BGGR16BE,	///< bayer, BGBG..(odd line), GRGR..(even line), 16-bit samples, big-endian */
+	AV_PIX_FMT_BAYER_RGGB16LE,	///< bayer, RGRG..(odd line), GBGB..(even line), 16-bit samples, little-endian */
+	AV_PIX_FMT_BAYER_RGGB16BE,	///< bayer, RGRG..(odd line), GBGB..(even line), 16-bit samples, big-endian */
+	AV_PIX_FMT_BAYER_GBRG16LE,	///< bayer, GBGB..(odd line), RGRG..(even line), 16-bit samples, little-endian */
+	AV_PIX_FMT_BAYER_GBRG16BE,	///< bayer, GBGB..(odd line), RGRG..(even line), 16-bit samples, big-endian */
+	AV_PIX_FMT_BAYER_GRBG16LE,	///< bayer, GRGR..(odd line), BGBG..(even line), 16-bit samples, little-endian */
+	AV_PIX_FMT_BAYER_GRBG16BE,	///< bayer, GRGR..(odd line), BGBG..(even line), 16-bit samples, big-endian */
 
 	AV_PIX_FMT_XVMC,	///< XVideo Motion Acceleration via common packet passing
 
-	AV_PIX_FMT_YUV440P10LE, ///< planar YUV 4:4:0,20bpp, (1 Cr & Cb sample per 1x2 Y samples), little-endian
-	AV_PIX_FMT_YUV440P10BE, ///< planar YUV 4:4:0,20bpp, (1 Cr & Cb sample per 1x2 Y samples), big-endian
-	AV_PIX_FMT_YUV440P12LE, ///< planar YUV 4:4:0,24bpp, (1 Cr & Cb sample per 1x2 Y samples), little-endian
-	AV_PIX_FMT_YUV440P12BE, ///< planar YUV 4:4:0,24bpp, (1 Cr & Cb sample per 1x2 Y samples), big-endian
-	AV_PIX_FMT_AYUV64LE,    ///< packed AYUV 4:4:4,64bpp (1 Cr & Cb sample per 1x1 Y & A samples), little-endian
-	AV_PIX_FMT_AYUV64BE,    ///< packed AYUV 4:4:4,64bpp (1 Cr & Cb sample per 1x1 Y & A samples), big-endian
+	AV_PIX_FMT_YUV440P10LE,	///< planar YUV 4:4:0,20bpp, (1 Cr & Cb sample per 1x2 Y samples), little-endian
+	AV_PIX_FMT_YUV440P10BE,	///< planar YUV 4:4:0,20bpp, (1 Cr & Cb sample per 1x2 Y samples), big-endian
+	AV_PIX_FMT_YUV440P12LE,	///< planar YUV 4:4:0,24bpp, (1 Cr & Cb sample per 1x2 Y samples), little-endian
+	AV_PIX_FMT_YUV440P12BE,	///< planar YUV 4:4:0,24bpp, (1 Cr & Cb sample per 1x2 Y samples), big-endian
+	AV_PIX_FMT_AYUV64LE,	///< packed AYUV 4:4:4,64bpp (1 Cr & Cb sample per 1x1 Y & A samples), little-endian
+	AV_PIX_FMT_AYUV64BE,	///< packed AYUV 4:4:4,64bpp (1 Cr & Cb sample per 1x1 Y & A samples), big-endian
 
-	AV_PIX_FMT_VIDEOTOOLBOX, ///< hardware decoding through Videotoolbox
+	AV_PIX_FMT_VIDEOTOOLBOX,	///< hardware decoding through Videotoolbox
 
-	AV_PIX_FMT_P010LE, ///< like NV12, with 10bpp per component, data in the high bits, zeros in the low bits, little-endian
-	AV_PIX_FMT_P010BE, ///< like NV12, with 10bpp per component, data in the high bits, zeros in the low bits, big-endian
+	AV_PIX_FMT_P010LE,	///< like NV12, with 10bpp per component, data in the high bits, zeros in the low bits, little-endian
+	AV_PIX_FMT_P010BE,	///< like NV12, with 10bpp per component, data in the high bits, zeros in the low bits, big-endian
 
-	AV_PIX_FMT_GBRAP12BE,  ///< planar GBR 4:4:4:4 48bpp, big-endian
-	AV_PIX_FMT_GBRAP12LE,  ///< planar GBR 4:4:4:4 48bpp, little-endian
+	AV_PIX_FMT_GBRAP12BE,	///< planar GBR 4:4:4:4 48bpp, big-endian
+	AV_PIX_FMT_GBRAP12LE,	///< planar GBR 4:4:4:4 48bpp, little-endian
 
-	AV_PIX_FMT_GBRAP10BE,  ///< planar GBR 4:4:4:4 40bpp, big-endian
-	AV_PIX_FMT_GBRAP10LE,  ///< planar GBR 4:4:4:4 40bpp, little-endian
+	AV_PIX_FMT_GBRAP10BE,	///< planar GBR 4:4:4:4 40bpp, big-endian
+	AV_PIX_FMT_GBRAP10LE,	///< planar GBR 4:4:4:4 40bpp, little-endian
 
-	AV_PIX_FMT_MEDIACODEC, ///< hardware decoding through MediaCodec
+	AV_PIX_FMT_MEDIACODEC,	///< hardware decoding through MediaCodec
 
-	AV_PIX_FMT_GRAY12BE,   ///<        Y        , 12bpp, big-endian
-	AV_PIX_FMT_GRAY12LE,   ///<        Y        , 12bpp, little-endian
-	AV_PIX_FMT_GRAY10BE,   ///<        Y        , 10bpp, big-endian
-	AV_PIX_FMT_GRAY10LE,   ///<        Y        , 10bpp, little-endian
+	AV_PIX_FMT_GRAY12BE,	///<        Y        , 12bpp, big-endian
+	AV_PIX_FMT_GRAY12LE,	///<        Y        , 12bpp, little-endian
+	AV_PIX_FMT_GRAY10BE,	///<        Y        , 10bpp, big-endian
+	AV_PIX_FMT_GRAY10LE,	///<        Y        , 10bpp, little-endian
 
-	AV_PIX_FMT_P016LE, ///< like NV12, with 16bpp per component, little-endian
-	AV_PIX_FMT_P016BE, ///< like NV12, with 16bpp per component, big-endian
+	AV_PIX_FMT_P016LE,	///< like NV12, with 16bpp per component, little-endian
+	AV_PIX_FMT_P016BE,	///< like NV12, with 16bpp per component, big-endian
 
 	/**
 	 * Hardware surfaces for Direct3D11.
@@ -268,13 +264,13 @@ public enum AVPixelFormat {
 	 */
 	AV_PIX_FMT_D3D11,
 
-	AV_PIX_FMT_GRAY9BE,   ///<        Y        , 9bpp, big-endian
-	AV_PIX_FMT_GRAY9LE,   ///<        Y        , 9bpp, little-endian
+	AV_PIX_FMT_GRAY9BE,	///<        Y        , 9bpp, big-endian
+	AV_PIX_FMT_GRAY9LE,	///<        Y        , 9bpp, little-endian
 
-	AV_PIX_FMT_GBRPF32BE,  ///< IEEE-754 single precision planar GBR 4:4:4,     96bpp, big-endian
-	AV_PIX_FMT_GBRPF32LE,  ///< IEEE-754 single precision planar GBR 4:4:4,     96bpp, little-endian
-	AV_PIX_FMT_GBRAPF32BE, ///< IEEE-754 single precision planar GBRA 4:4:4:4, 128bpp, big-endian
-	AV_PIX_FMT_GBRAPF32LE, ///< IEEE-754 single precision planar GBRA 4:4:4:4, 128bpp, little-endian
+	AV_PIX_FMT_GBRPF32BE,	///< IEEE-754 single precision planar GBR 4:4:4,     96bpp, big-endian
+	AV_PIX_FMT_GBRPF32LE,	///< IEEE-754 single precision planar GBR 4:4:4,     96bpp, little-endian
+	AV_PIX_FMT_GBRAPF32BE,	///< IEEE-754 single precision planar GBRA 4:4:4:4, 128bpp, big-endian
+	AV_PIX_FMT_GBRAPF32LE,	///< IEEE-754 single precision planar GBRA 4:4:4:4, 128bpp, little-endian
 
 	/**
 	 * DRM-managed buffers exposed through PRIME buffer sharing.
@@ -290,19 +286,17 @@ public enum AVPixelFormat {
 	 */
 	AV_PIX_FMT_OPENCL,
 
-	AV_PIX_FMT_GRAY14BE,   ///<        Y        , 14bpp, big-endian
-	AV_PIX_FMT_GRAY14LE,   ///<        Y        , 14bpp, little-endian
+	AV_PIX_FMT_GRAY14BE,	///<        Y        , 14bpp, big-endian
+	AV_PIX_FMT_GRAY14LE,	///<        Y        , 14bpp, little-endian
 
-	AV_PIX_FMT_GRAYF32BE,  ///< IEEE-754 single precision Y, 32bpp, big-endian
-	AV_PIX_FMT_GRAYF32LE,  ///< IEEE-754 single precision Y, 32bpp, little-endian
+	AV_PIX_FMT_GRAYF32BE,	///< IEEE-754 single precision Y, 32bpp, big-endian
+	AV_PIX_FMT_GRAYF32LE,	///< IEEE-754 single precision Y, 32bpp, little-endian
 
-	AV_PIX_FMT_YUVA422P12BE, ///< planar YUV 4:2:2,24bpp, (1 Cr & Cb sample per 2x1 Y samples), 12b alpha, big-endian
-	AV_PIX_FMT_YUVA422P12LE, ///< planar YUV 4:2:2,24bpp, (1 Cr & Cb sample per 2x1 Y samples), 12b alpha, little-endian
-	AV_PIX_FMT_YUVA444P12BE, ///< planar YUV 4:4:4,36bpp, (1 Cr & Cb sample per 1x1 Y samples), 12b alpha, big-endian
-	AV_PIX_FMT_YUVA444P12LE, ///< planar YUV 4:4:4,36bpp, (1 Cr & Cb sample per 1x1 Y samples), 12b alpha, little-endian
+	AV_PIX_FMT_YUVA422P12BE,	///< planar YUV 4:2:2,24bpp, (1 Cr & Cb sample per 2x1 Y samples), 12b alpha, big-endian
+	AV_PIX_FMT_YUVA422P12LE,	///< planar YUV 4:2:2,24bpp, (1 Cr & Cb sample per 2x1 Y samples), 12b alpha, little-endian
+	AV_PIX_FMT_YUVA444P12BE,	///< planar YUV 4:4:4,36bpp, (1 Cr & Cb sample per 1x1 Y samples), 12b alpha, big-endian
+	AV_PIX_FMT_YUVA444P12LE,	///< planar YUV 4:4:4,36bpp, (1 Cr & Cb sample per 1x1 Y samples), 12b alpha, little-endian
 
-	AV_PIX_FMT_NV24,      ///< planar YUV 4:4:4, 24bpp, 1 plane for Y and 1 plane for the UV components, which are interleaved (first byte U and the following byte V)
-	AV_PIX_FMT_NV42,      ///< as above, but U and V bytes are swapped
-
-	//AV_PIX_FMT_NB         ///< number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions
+	AV_PIX_FMT_NV24,	///< planar YUV 4:4:4, 24bpp, 1 plane for Y and 1 plane for the UV components, which are interleaved (first byte U and the following byte V)
+	AV_PIX_FMT_NV42		///< as above, but U and V bytes are swapped
 }

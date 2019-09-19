@@ -42,4 +42,19 @@ AVPixelFormat longToAVPixelFormat(long index);
 long AVColorPrimariesToLong(AVColorPrimaries colorPrimaries);
 AVColorPrimaries longToAVColorPrimaries(long index);
 
+long AVColorPrimariesToLong(AVColorPrimaries colorPrimaries);
+AVColorPrimaries longToAVColorPrimaries(long index);
+
+long AVColorTransferCharacteristicToLong(AVColorTransferCharacteristic characteristic);
+AVColorTransferCharacteristic longToAVColorTransferCharacteristic(long index);
+
+long AVColorSpaceToLong(AVColorSpace colorSpace);
+AVColorSpace longToAVColorSpace(long index);
+
+long AVColorRangeToLong(AVColorRange colorRange);
+AVColorRange longToAVColorRange(long index);
+
+long AVChromaLocationToLong(AVChromaLocation chromaLocation);
+AVChromaLocation longToAVChromaLocation(long index);
+
 #endif //HELLOFFMPEG_AVUTIL_HELPER_HPP
