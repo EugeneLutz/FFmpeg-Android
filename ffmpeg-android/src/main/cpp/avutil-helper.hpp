@@ -30,6 +30,11 @@ inline AVClass* getClass(jlong pointer)
     return reinterpret_cast<AVClass*>(pointer);
 }
 
+inline AVRational* getRational(jlong pointer)
+{
+    return reinterpret_cast<AVRational*>(pointer);
+}
+
 long AVRoundingToLong(AVRounding rounding);
 AVRounding longToAVRounding(long index);
 
@@ -56,5 +61,9 @@ AVColorRange longToAVColorRange(long index);
 
 long AVChromaLocationToLong(AVChromaLocation chromaLocation);
 AVChromaLocation longToAVChromaLocation(long index);
+
+
+long AVPictureTypeToLong(AVPictureType chromaLocation);
+AVPictureType longToAVPictureType(long index);
 
 #endif //HELLOFFMPEG_AVUTIL_HELPER_HPP

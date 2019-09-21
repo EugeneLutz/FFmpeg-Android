@@ -16,6 +16,7 @@ public class AVUtilHelper
 	private static ArrayList<IndexMap<AVColorSpace>> colorSpaceMap;
 	private static ArrayList<IndexMap<AVColorRange>> colorRangeMap;
 	private static ArrayList<IndexMap<AVChromaLocation>> chromaLocationMap;
+	private static ArrayList<IndexMap<AVPictureType>> pictureTypeMap;
 
 	static {
 		classCategoryMap = new ArrayList<>();
@@ -316,6 +317,16 @@ public class AVUtilHelper
 		chromaLocationMap.add(new IndexMap<>(AVChromaLocation.AVCHROMA_LOC_TOP, 5));
 		chromaLocationMap.add(new IndexMap<>(AVChromaLocation.AVCHROMA_LOC_BOTTOMLEFT, 6));
 		chromaLocationMap.add(new IndexMap<>(AVChromaLocation.AVCHROMA_LOC_BOTTOM, 7));
+
+		pictureTypeMap = new ArrayList<>();
+		pictureTypeMap.add(new IndexMap<>(AVPictureType.AV_PICTURE_TYPE_NONE, 1));
+		pictureTypeMap.add(new IndexMap<>(AVPictureType.AV_PICTURE_TYPE_I, 2));
+		pictureTypeMap.add(new IndexMap<>(AVPictureType.AV_PICTURE_TYPE_P, 3));
+		pictureTypeMap.add(new IndexMap<>(AVPictureType.AV_PICTURE_TYPE_B, 4));
+		pictureTypeMap.add(new IndexMap<>(AVPictureType.AV_PICTURE_TYPE_S, 5));
+		pictureTypeMap.add(new IndexMap<>(AVPictureType.AV_PICTURE_TYPE_SI, 6));
+		pictureTypeMap.add(new IndexMap<>(AVPictureType.AV_PICTURE_TYPE_SP, 7));
+		pictureTypeMap.add(new IndexMap<>(AVPictureType.AV_PICTURE_TYPE_BI, 8));
 	}
 
 
@@ -422,5 +433,17 @@ public class AVUtilHelper
 	public static AVChromaLocation longToAVChromaLocation(long value)
 	{
 		return IndexMap.getValueByIndex(chromaLocationMap, value);
+	}
+
+
+
+	public static long AVPictureTypeToLong(AVPictureType pictureType)
+	{
+		return IndexMap.getIndexByValue(AVUtilHelper.pictureTypeMap, pictureType);
+	}
+
+	public static AVPictureType longToAVPictureType(long value)
+	{
+		return IndexMap.getValueByIndex(pictureTypeMap, value);
 	}
 }

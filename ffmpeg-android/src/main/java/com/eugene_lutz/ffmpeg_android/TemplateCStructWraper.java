@@ -1,21 +1,6 @@
 package com.eugene_lutz.ffmpeg_android;
 
 
-/*class AVFilter
-{
-	// ...
-
-	public String getName()
-	{
-		// ...
-	}
-
-	public int getFlags()
-	{
-		// ...
-	}
-}*/
-
 public class TemplateCStructWraper extends CStructWrapper
 {
 	//region Class related stuff

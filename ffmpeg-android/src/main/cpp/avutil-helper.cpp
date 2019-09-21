@@ -517,4 +517,43 @@ AVChromaLocation longToAVChromaLocation(long value)
     return IndexMap<AVChromaLocation>::GetValueByIndex(chromaLocationMap, value);
 }
 
+
+
+static std::vector<IndexMap<AVPictureType>> pictureTypeMap;
+static bool _pictureTypeInitialized = false;
+static void initializepictureTypeMap()
+{
+    pictureTypeMap.clear();
+    pictureTypeMap.emplace_back(AV_PICTURE_TYPE_NONE, 1);
+    pictureTypeMap.emplace_back(AV_PICTURE_TYPE_I, 2);
+    pictureTypeMap.emplace_back(AV_PICTURE_TYPE_P, 3);
+    pictureTypeMap.emplace_back(AV_PICTURE_TYPE_B, 4);
+    pictureTypeMap.emplace_back(AV_PICTURE_TYPE_S, 5);
+    pictureTypeMap.emplace_back(AV_PICTURE_TYPE_SI, 6);
+    pictureTypeMap.emplace_back(AV_PICTURE_TYPE_SP, 7);
+    pictureTypeMap.emplace_back(AV_PICTURE_TYPE_BI, 8);
+
+    _pictureTypeInitialized = true;
+}
+
+long AVPictureTypeToLong(AVPictureType pictureType)
+{
+    if (!_pictureTypeInitialized)
+    {
+        initializepictureTypeMap();
+    }
+
+    return IndexMap<AVPictureType>::GetIndexByValue(pictureTypeMap, pictureType);
+}
+
+AVPictureType longToAVPictureType(long value)
+{
+    if (!_pictureTypeInitialized)
+    {
+        initializepictureTypeMap();
+    }
+
+    return IndexMap<AVPictureType>::GetValueByIndex(pictureTypeMap, value);
+}
+
 #pragma clang diagnostic pop
