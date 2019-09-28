@@ -10,6 +10,7 @@ import com.eugene_lutz.ffmpeg_android.avformat.AVFormatContext;
 import com.eugene_lutz.ffmpeg_android.avformat.AVIO;
 import com.eugene_lutz.ffmpeg_android.avformat.AVIOContext;
 import com.eugene_lutz.ffmpeg_android.avformat.AVOutputFormat;
+import com.eugene_lutz.ffmpeg_android.avutil.AVFrame;
 import com.eugene_lutz.ffmpeg_android.avutil.AVRational;
 import com.eugene_lutz.ffmpeg_android.avformat.AVStream;
 import com.eugene_lutz.ffmpeg_android.avutil.AVMediaType;
@@ -142,7 +143,6 @@ class RemuxingSample
 			final int destinationStreamIndex = streamMapping[sourceStreamIndex];
 			packet.setStreamIndex(destinationStreamIndex);
 			final AVStream outStream = outputContext.getStream(destinationStreamIndex);
-
 
 			final AVRational inTimeBase = inStream.getTimeBase();
 			final AVRational outTimeBase = outStream.getTimeBase();

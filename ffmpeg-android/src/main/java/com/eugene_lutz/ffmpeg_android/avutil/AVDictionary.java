@@ -1,6 +1,7 @@
 package com.eugene_lutz.ffmpeg_android.avutil;
 
 import com.eugene_lutz.ffmpeg_android.CStructWrapper;
+import com.eugene_lutz.ffmpeg_android.ExecuteResult;
 
 /**
  *  AVDictionary is provided for compatibility with libav. It is both in
@@ -11,22 +12,14 @@ import com.eugene_lutz.ffmpeg_android.CStructWrapper;
  */
 public class AVDictionary extends CStructWrapper
 {
+	//region Class related stuff
+
 	/** Only get an entry with exact-case key match. Only relevant in AVDictionary.get(). */
 	public static final int AV_DICT_MATCH_CASE = 1;
 
 	/** Return first entry in a dictionary whose first part corresponds to the search key,
 	 ignoring the suffix of the found key string. Only relevant in AVDictionary.get(). */
 	public static final int AV_DICT_IGNORE_SUFFIX = 2;
-
-	// Слишком приближено к C, без этого прожить можно, уберём
-	/* * Take ownership of a key that's been
-	 allocated with av_malloc() or another memory allocation function. */
-	//public static final int AV_DICT_DONT_STRDUP_KEY = 4;
-
-	// Слишком приближено к C, без этого прожить можно, уберём
-	/* * Take ownership of a value that's been
-	 allocated with av_malloc() or another memory allocation function. */
-	//public static final int AV_DICT_DONT_STRDUP_VAL = 8;
 
 	/** Don't overwrite existing entries. */
 	public static final int AV_DICT_DONT_OVERWRITE = 16;
@@ -38,6 +31,8 @@ public class AVDictionary extends CStructWrapper
 	/** Allow to store several equal keys in the dictionary */
 	public static final int AV_DICT_MULTIKEY = 64;
 
+	//endregion
+
 
 
 	//region Constructor, Destructor, etc...
@@ -48,25 +43,9 @@ public class AVDictionary extends CStructWrapper
 	}
 
 	@Override
-	protected void finalize() /*throws Throwable*/
+	protected void finalizeDefault()
 	{
-		switch (allocationType)
-		{
-			case FROM_INSTANCE: break;
-			case ALLOC: freeNative(pointer); break;
-			case CUSTOM: customFinalize(); break;
-			default: break;
-		}
-	}
-
-	private void customFinalize()
-	{
-		switch (customFlag)
-		{
-			case 0: break;
-			case 1: break;
-			default: break;
-		}
+		freeNative(pointer);
 	}
 
 	public static AVDictionary from(long pointer)
@@ -181,32 +160,9 @@ public class AVDictionary extends CStructWrapper
 	 * @return 0 on success, negative AVERROR code on failure. If dst was allocated
 	 *           by this function, callers should free the associated memory.
 	 */
-	public int copy(AVDictionary source, int flags)
+	public int copyFrom(AVDictionary source, int flags)
 	{
 		return copyNative(source.pointer, flags);
-	}
-
-
-	public static class GetStringResult
-	{
-		private String string;
-		private int code;
-
-		GetStringResult()
-		{
-			string = null;
-			code = 0;
-		}
-
-		public String getString()
-		{
-			return string;
-		}
-
-		public int getCode()
-		{
-			return code;
-		}
 	}
 
 	/**
@@ -221,11 +177,9 @@ public class AVDictionary extends CStructWrapper
 	 * @param  pairsSep     character used to separate two pairs from each other
 	 * @return                   {@literal >}= 0 on success, negative on error
 	 */
-	public GetStringResult getString(char keyValSep, char pairsSep)
+	public String getString(char keyValSep, char pairsSep, ExecuteResult result)
 	{
-		final GetStringResult result = new GetStringResult();
-		getStringNative(pointer, keyValSep, pairsSep, result);
-		return result;
+		return getStringNative(pointer, keyValSep, pairsSep, result);
 	}
 
 	//endregion
@@ -247,7 +201,7 @@ public class AVDictionary extends CStructWrapper
 	private native int parseStringNative(String str, String keyValSep, String pairsSep, int flags);
 	private native int copyNative(long src, int flags);
 	private static native void freeNative(long pointer);
-	private static native void getStringNative(long pointer, char keyValSep, char pairsSep, GetStringResult result);
+	private static native String getStringNative(long pointer, char keyValSep, char pairsSep, ExecuteResult result);
 
 	//endregion
 }

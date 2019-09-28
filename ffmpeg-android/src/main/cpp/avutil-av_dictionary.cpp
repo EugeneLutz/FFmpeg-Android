@@ -8,6 +8,7 @@ extern "C" {
 #include "cstruct_wrapper.hpp"
 #include "util.hpp"
 #include "avutil-helper.hpp"
+#include "ExecuteResult.hpp"
 
 
 JNI_FUNCTION(jlong, avutil_AVDictionary, getNative)(JNIEnv* env, jclass,
@@ -39,11 +40,25 @@ JNI_FUNCTION(jint, avutil_AVDictionary, setNative)(JNIEnv* env,
     auto wrapper = CStructWrapper(obj, env);
     auto keyString = JNIString(key, env);
     auto valueString = JNIString(value, env);
-    auto flagsInt = toint(flags);
+
+    auto keyLength = keyString.getData() ? strlen(keyString.getData()) : 0;
+    auto keyCharString = keyLength ? av_memdup(keyString.getData(), sizeof(char) * keyLength + 1) : nullptr;
+
+    auto valueLength = strlen(valueString.getData());
+    auto valueCharString = av_memdup(valueString.getData(), sizeof(char) * valueLength + 1);
+
+    /*
+     * AV_DICT_DONT_STRDUP_KEY - av_dict_set will delete keyCharString
+     * AV_DICT_DONT_STRDUP_VAL - av_dict_set will delete valueCharString
+     */
+    auto flagsInt = touint(flags) | AV_DICT_DONT_STRDUP_KEY | AV_DICT_DONT_STRDUP_VAL;
 
     auto pointer = wrapper.getPointer();
     auto dictionary = getDictionary(pointer);
-    auto result = av_dict_set(&dictionary, keyString.getData(), valueString.getData(), flagsInt);
+    auto result = av_dict_set(&dictionary,
+            static_cast<char*>(keyCharString),
+            static_cast<char*>(valueCharString),
+            toint(flagsInt));
     wrapper.setPointer(dictionary);
 
     return tojint(result);
@@ -111,18 +126,30 @@ JNI_FUNCTION(void, avutil_AVDictionary, freeNative)(JNIEnv*, jclass, jlong point
 }
 
 
-JNI_FUNCTION(void, avutil_AVDictionary, getStringNative)(JNIEnv* env, jclass,
+JNI_FUNCTION(jstring, avutil_AVDictionary, getStringNative)(JNIEnv* env, jclass,
         jlong pointer, jchar keyValSep, jchar pairsSep, jobject result)
 {
     auto dict = getDictionary(pointer);
     auto key_val_sep = tochar(keyValSep);
     auto pairs_sep = tochar(pairsSep);
-    auto c = JavaClass(result, env);
+    auto c = ExecuteResult(result, env);
+
     char* buffer = nullptr;
     auto res = av_dict_get_string(dict, &buffer, key_val_sep, pairs_sep);
 
-    c.SetInt(res, "code");
-    c.SetString(buffer, "string");
+    c.SetSucceeded(res >= 0);
+    c.SetCode(res);
 
+    if (res < 0)
+    {
+        char message[AV_ERROR_MAX_STRING_SIZE];
+        av_make_error_string(message, AV_ERROR_MAX_STRING_SIZE, AVERROR(res));
+        c.SetMessage(message);
+
+        return nullptr;
+    }
+
+    auto retString = env->NewStringUTF(buffer);
     av_free(buffer);
+    return retString;
 }

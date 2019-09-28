@@ -2,6 +2,7 @@ package com.eugene_lutz.testapplication;
 
 import android.util.Log;
 
+import com.eugene_lutz.ffmpeg_android.ExecuteResult;
 import com.eugene_lutz.ffmpeg_android.avformat.AVFormat;
 import com.eugene_lutz.ffmpeg_android.avformat.AVFormatContext;
 import com.eugene_lutz.ffmpeg_android.avformat.AVIO;
@@ -88,13 +89,13 @@ public class FFmpegTest
 		Log.d(LOG_TEST, entryString);
 
 		AVDictionary imported = AVDictionary.create();
-		final AVDictionary.GetStringResult result = dictionary.getString(':', ';');
-		final String exportString = result.getString();
+		final ExecuteResult executeResult = new ExecuteResult();
+		final String exportString = dictionary.getString(':', ';', executeResult);
 		imported.parseString(exportString, ":", ";", AVDictionary.AV_DICT_MULTIKEY);
 		dumpAVDictionary(imported);
 
 		AVDictionary copyDictionary = AVDictionary.create();
-		copyDictionary.copy(dictionary, AVDictionary.AV_DICT_MULTIKEY);
+		copyDictionary.copyFrom(dictionary, AVDictionary.AV_DICT_MULTIKEY);
 		dumpAVDictionary(copyDictionary);
 	}
 
@@ -120,8 +121,9 @@ public class FFmpegTest
 		final int count = dictionary.count();
 		builder.append(String.format(Locale.GERMANY, "Elements in dictionary: %d\n", count));
 
-		final AVDictionary.GetStringResult result = dictionary.getString(':', ';');
-		final String contents = result.getCode() == 0 ? result.getString() : String.format(Locale.GERMANY, "Error code: %d", result.getCode());
+		final ExecuteResult executeResult = new ExecuteResult();
+		final String result = dictionary.getString(':', ';', executeResult);
+		final String contents = executeResult.getCode() == 0 ? executeResult.getMessage() : String.format(Locale.GERMANY, "Error code: %d", executeResult.getCode());
 		builder.append(String.format(Locale.GERMANY, "Contents of dictionary: %s\n", contents));
 
 		return builder;

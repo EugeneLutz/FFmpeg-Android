@@ -12,7 +12,12 @@ public:
     {
         env = environment;
         obj = object;
-        klazz = env->GetObjectClass(object);
+        klazz = object ? env->GetObjectClass(object) : nullptr;
+    }
+
+    virtual ~JavaClass()
+    {
+        //
     }
 
 
@@ -25,6 +30,10 @@ public:
 
     void SetBoolean(bool value, const char* fieldName)
     {
+        if (!obj) {
+            return;
+        }
+
         auto field = env->GetFieldID(klazz, fieldName, "Z");
         env->SetBooleanField(obj, field, tojboolean(value));
     }
@@ -39,6 +48,10 @@ public:
 
     void SetInt(int value, const char* fieldName)
     {
+        if (!obj) {
+            return;
+        }
+
         auto field = env->GetFieldID(klazz, fieldName, "I");
         env->SetIntField(obj, field, value);
     }
@@ -53,6 +66,10 @@ public:
 
     void SetLong(long value, const char* fieldName)
     {
+        if (!obj) {
+            return;
+        }
+
         auto field = env->GetFieldID(klazz, fieldName, "J");
         env->SetLongField(obj, field, value);
     }
@@ -67,13 +84,43 @@ public:
 
     void SetString(const char* value, const char* fieldName)
     {
+        if (!obj) {
+            return;
+        }
+
         auto field = env->GetFieldID(klazz, fieldName, "Ljava/lang/String;");
         auto string = env->NewStringUTF(value);
         env->SetObjectField(obj, field, string);
     }
 
+    bool IsNull()
+    {
+        return obj == nullptr;
+    }
+
 
 protected:
+    jfieldID GetBooleanField(const char* javaFieldName)
+    {
+        return env->GetFieldID(klazz, javaFieldName, "Z");
+    }
+
+    jfieldID GetIntField(const char* javaFieldName)
+    {
+        return env->GetFieldID(klazz, javaFieldName, "I");
+    }
+
+    jfieldID GetLongField(const char* javaFieldName)
+    {
+        return env->GetFieldID(klazz, javaFieldName, "J");
+    }
+
+    jfieldID GetStringField(const char* javaFieldName)
+    {
+        return env->GetFieldID(klazz, javaFieldName, "Ljava/lang/String;");
+    }
+
+
     JNIEnv* env;
     jobject obj;
     jclass klazz;
