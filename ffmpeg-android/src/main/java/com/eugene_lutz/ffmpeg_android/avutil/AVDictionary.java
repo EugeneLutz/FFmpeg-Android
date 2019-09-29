@@ -7,7 +7,7 @@ import com.eugene_lutz.ffmpeg_android.ExecuteResult;
  *  AVDictionary is provided for compatibility with libav. It is both in
  *  implementation as well as API inefficient. It does not scale and is
  *  extremely slow with large dictionaries.
- *  It is recommended that new code uses our tree container from tree.c/h
+ *  It is recommended that new code uses tree container from AVTreeNode
  *  where applicable, which uses AVL trees to achieve O(log n) performance.
  */
 public class AVDictionary extends CStructWrapper

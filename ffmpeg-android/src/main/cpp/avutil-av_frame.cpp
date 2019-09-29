@@ -9,6 +9,18 @@ extern "C" {
 #include "avutil-helper.hpp"
 
 
+JNI_FUNCTION(jlong, avutil_AVFrame, createNative)(JNIEnv*, jclass)
+{
+    auto frame = av_frame_alloc();
+    return asjlong(frame);
+}
+
+JNI_FUNCTION(void, avutil_AVFrame, freeNative)(JNIEnv*, jclass, jlong pointer)
+{
+    auto frame = getFrame(pointer);
+    av_frame_free(&frame);
+}
+
 JNI_FUNCTION(jobject, avutil_AVFrame, getDataNative)(JNIEnv* env, jclass, jlong pointer, jint planeIndex)
 {
     auto frame = getFrame(pointer);

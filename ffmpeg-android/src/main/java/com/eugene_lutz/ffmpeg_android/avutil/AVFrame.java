@@ -36,23 +36,59 @@ import java.nio.ByteBuffer;
  */
 public class AVFrame extends CStructWrapper
 {
-	public AVFrame(long pointer)
+	//region Constructor, Destructor, etc...
+
+	private AVFrame(long pointer, AllocationType allocationType, int allocationFlag)
 	{
-		super(pointer, AllocationType.FROM_INSTANCE, 0);
+		super(pointer, allocationType, allocationFlag);
 	}
 
-
-
-	public static AVFrame from(long pointer)
+	@Override
+	protected void finalizeDefault()
 	{
-		return pointer == 0 ? null : new AVFrame(pointer);
+		freeNative(pointer);
 	}
+
+	private static AVFrame from(long pointer)
+	{
+		return from(pointer, AllocationType.FROM_INSTANCE);
+	}
+
+	private static AVFrame from(long pointer, AllocationType allocationType)
+	{
+		return pointer == 0 ? null : new AVFrame(pointer, allocationType, 0);
+	}
+
+	//endregion
+
+
+	//region Static methods
+
+	public static AVFrame create()
+	{
+		final long framePointer = createNative();
+		return from(framePointer, AllocationType.ALLOC);
+	}
+
+	//endregion
+
+
+
+	//region Instance methods
 
 	public ByteBuffer getData(int planeIndex)
 	{
 		return getDataNative(pointer, planeIndex);
 	}
 
+	//endregion
 
+
+	//region Native methods
+
+	private static native long createNative();
+	private static native void freeNative(long pointer);
 	private static native ByteBuffer getDataNative(long pointer, int planeIndex);
+
+	//endregion
 }

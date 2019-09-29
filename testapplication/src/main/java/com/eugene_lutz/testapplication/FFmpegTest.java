@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public class FFmpegTest
 {
-	private static final String LOG_TEST = "LOG_TEST";
+	/*private static final String LOG_TEST = "LOG_TEST";
 
 	static class FormatFlag
 	{
@@ -59,7 +59,7 @@ public class FFmpegTest
 	{
 		checkAVDictionary();
 
-		/*checkAVFormatContext(path);
+		checkAVFormatContext(path);
 
 		checkAVInputFormatIterator();
 		checkAVInputFormat();
@@ -69,13 +69,13 @@ public class FFmpegTest
 
 		checkAVIOOutputProtocolIterator();
 		checkAVIOInputProtocolIterator();
-		checkAVIOEnumProtocols();*/
+		checkAVIOEnumProtocols();
 
 		Log.d(LOG_TEST, "FFmpeg test finished");
-	}
+	}*/
 
 
-	private static void checkAVDictionary()
+	/*private static void checkAVDictionary()
 	{
 		AVDictionary dictionary = AVDictionary.create();
 		dictionary.set("Hello", "World", AVDictionary.AV_DICT_APPEND);
@@ -143,12 +143,6 @@ public class FFmpegTest
 
 		int findStreamInfoResult = c.findStreamInfo();
 		Log.d(LOG_TEST, String.format("AVFormatContext.findStreamInfo() = %d", findStreamInfoResult));
-
-		/*{
-			final AVFormatContext c2 = new AVFormatContext();
-			final int c2result = c2.findStreamInfo();
-			Log.d(LOG_TEST, String.format("c2.findStreamInfo() = %d", c2result));
-		}*/
 
 		Log.d(LOG_TEST, "AVFormatContext run finished");
 	}
@@ -309,5 +303,5 @@ public class FFmpegTest
 		{
 			Log.d(LOG_TEST, string);
 		}
-	}
+	}*/
 }
