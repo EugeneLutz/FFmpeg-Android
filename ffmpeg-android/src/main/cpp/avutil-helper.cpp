@@ -556,4 +556,56 @@ AVPictureType longToAVPictureType(long value)
     return IndexMap<AVPictureType>::GetValueByIndex(pictureTypeMap, value);
 }
 
+
+
+static std::vector<IndexMap<AVFrameSideDataType>> frameSideDataTypeMap;
+static bool _frameSideDataTypeInitialized = false;
+static void initializeframeSideDataTypeMap()
+{
+    frameSideDataTypeMap.clear();
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_PANSCAN, 1);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_A53_CC, 2);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_STEREO3D, 3);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_MATRIXENCODING, 4);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_DOWNMIX_INFO, 5);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_REPLAYGAIN, 6);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_DISPLAYMATRIX, 7);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_AFD, 8);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_MOTION_VECTORS, 9);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_SKIP_SAMPLES, 10);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_AUDIO_SERVICE_TYPE, 11);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_MASTERING_DISPLAY_METADATA, 12);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_GOP_TIMECODE, 13);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_SPHERICAL, 14);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_CONTENT_LIGHT_LEVEL, 15);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_ICC_PROFILE, 16);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_QP_TABLE_PROPERTIES, 17);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_QP_TABLE_DATA, 18);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_S12M_TIMECODE, 19);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_DYNAMIC_HDR_PLUS, 20);
+    frameSideDataTypeMap.emplace_back(AV_FRAME_DATA_REGIONS_OF_INTEREST, 21);
+
+    _frameSideDataTypeInitialized = true;
+}
+
+long AVFrameSideDataTypeToLong(AVFrameSideDataType frameSideDataType)
+{
+    if (!_frameSideDataTypeInitialized)
+    {
+        initializeframeSideDataTypeMap();
+    }
+
+    return IndexMap<AVFrameSideDataType>::GetIndexByValue(frameSideDataTypeMap, frameSideDataType);
+}
+
+AVFrameSideDataType longToAVFrameSideDataType(long value)
+{
+    if (!_frameSideDataTypeInitialized)
+    {
+        initializeframeSideDataTypeMap();
+    }
+
+    return IndexMap<AVFrameSideDataType>::GetValueByIndex(frameSideDataTypeMap, value);
+}
+
 #pragma clang diagnostic pop

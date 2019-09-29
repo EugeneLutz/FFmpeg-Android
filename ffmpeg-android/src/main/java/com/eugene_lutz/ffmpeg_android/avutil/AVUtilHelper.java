@@ -17,6 +17,7 @@ public class AVUtilHelper
 	private static ArrayList<IndexMap<AVColorRange>> colorRangeMap;
 	private static ArrayList<IndexMap<AVChromaLocation>> chromaLocationMap;
 	private static ArrayList<IndexMap<AVPictureType>> pictureTypeMap;
+	private static ArrayList<IndexMap<AVFrameSideDataType>> frameSideDataTypeMap;
 
 	static {
 		classCategoryMap = new ArrayList<>();
@@ -327,6 +328,29 @@ public class AVUtilHelper
 		pictureTypeMap.add(new IndexMap<>(AVPictureType.AV_PICTURE_TYPE_SI, 6));
 		pictureTypeMap.add(new IndexMap<>(AVPictureType.AV_PICTURE_TYPE_SP, 7));
 		pictureTypeMap.add(new IndexMap<>(AVPictureType.AV_PICTURE_TYPE_BI, 8));
+
+		frameSideDataTypeMap = new ArrayList<>();
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_PANSCAN, 1));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_A53_CC, 2));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_STEREO3D, 3));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_MATRIXENCODING, 4));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_DOWNMIX_INFO, 5));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_REPLAYGAIN, 6));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_DISPLAYMATRIX, 7));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_AFD, 8));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_MOTION_VECTORS, 9));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_SKIP_SAMPLES, 10));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_AUDIO_SERVICE_TYPE, 11));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_MASTERING_DISPLAY_METADATA, 12));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_GOP_TIMECODE, 13));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_SPHERICAL, 14));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_CONTENT_LIGHT_LEVEL, 15));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_ICC_PROFILE, 16));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_QP_TABLE_PROPERTIES, 17));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_QP_TABLE_DATA, 18));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_S12M_TIMECODE, 19));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_DYNAMIC_HDR_PLUS, 20));
+		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_REGIONS_OF_INTEREST, 21));
 	}
 
 
@@ -445,5 +469,17 @@ public class AVUtilHelper
 	public static AVPictureType longToAVPictureType(long value)
 	{
 		return IndexMap.getValueByIndex(pictureTypeMap, value);
+	}
+
+
+
+	public static long AVFrameSideDataTypeToLong(AVFrameSideDataType frameSideDataType)
+	{
+		return IndexMap.getIndexByValue(AVUtilHelper.frameSideDataTypeMap, frameSideDataType);
+	}
+
+	public static AVFrameSideDataType longToAVFrameSideDataType(long value)
+	{
+		return IndexMap.getValueByIndex(frameSideDataTypeMap, value);
 	}
 }

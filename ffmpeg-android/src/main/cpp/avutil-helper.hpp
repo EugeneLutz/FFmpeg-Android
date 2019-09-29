@@ -62,8 +62,10 @@ AVColorRange longToAVColorRange(long index);
 long AVChromaLocationToLong(AVChromaLocation chromaLocation);
 AVChromaLocation longToAVChromaLocation(long index);
 
-
 long AVPictureTypeToLong(AVPictureType chromaLocation);
 AVPictureType longToAVPictureType(long index);
+
+long AVFrameSideDataTypeToLong(AVFrameSideDataType frameSideDataType);
+AVFrameSideDataType longToAVFrameSideDataType(long index);
 
 #endif //HELLOFFMPEG_AVUTIL_HELPER_HPP
