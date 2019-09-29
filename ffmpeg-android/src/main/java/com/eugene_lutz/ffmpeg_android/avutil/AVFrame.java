@@ -76,9 +76,126 @@ public class AVFrame extends CStructWrapper
 
 	//region Instance methods
 
+	//endregion
+
+
+
+	//region Getters/Setters
+
+	/**
+	 * Returns byte buffer of picture/channel plane.
+	 * This might be different from the first allocated byte
+	 *
+	 * Some decoders access areas outside 0,0 - width,height, please
+	 * see avcodec_align_dimensions2(). Some filters and swscale can read
+	 * up to 16 bytes beyond the planes, if these filters are to be used,
+	 * then 16 extra bytes must be allocated.
+	 *
+	 * NOTE: Except for hwaccel formats, pointers not needed by the format
+	 * MUST be set to NULL.
+	 * @param planeIndex index of plane.
+	 * @return           byte buffer of picture/channel plane.
+	 */
 	public ByteBuffer getData(int planeIndex)
 	{
 		return getDataNative(pointer, planeIndex);
+	}
+
+	/**
+	 * For video, size in bytes of each picture line.
+	 * For audio, size in bytes of each plane.
+	 *
+	 * For audio, only linesize[0] may be set. For planar audio, each channel
+	 * plane must be the same size.
+	 *
+	 * For video the linesizes should be multiples of the CPUs alignment
+	 * preference, this is 16 or 32 for modern desktop CPUs.
+	 * Some code requires such alignment other code can be slower without
+	 * correct alignment, for yet other it makes no difference.
+	 *
+	 * Note: The linesize may be larger than the size of usable data -- there
+	 * may be extra padding present for performance reasons.
+	 * @param planeIndex index of plane.
+	 * @return           size in bytes.
+	 */
+	public int getLineSize(int planeIndex)
+	{
+		return getLineSizeNative(pointer, planeIndex);
+	}
+
+	/**
+	 * Used with video frames only. The coded width (in pixels) of the video frame,
+	 * i.e. the size of the rectangle that contains some well-defined values.
+	 *
+	 * Note: The part of the frame intended for display/presentation is further
+	 * restricted by the cropping "Cropping rectangle".
+	 *
+	 * @return width of frame.
+	 */
+	public int getWidth()
+	{
+		return getWidthNative(pointer);
+	}
+
+	/**
+	 * Used with video frames only. The coded height (in pixels) of the video frame,
+	 * i.e. the size of the rectangle that contains some well-defined values.
+	 *
+	 * Note: The part of the frame intended for display/presentation is further
+	 * restricted by the cropping "Cropping rectangle".
+	 *
+	 * @return height of frame.
+	 */
+	public int getHeight()
+	{
+		return getHeightNative(pointer);
+	}
+
+	/**
+	 * Returns number of audio samples (per channel) described by this frame.
+	 * @return number of audio samples.
+	 */
+	public int getNumberOfSamples()
+	{
+		return getNumberOfSamplesNative(pointer);
+	}
+
+	/**
+	 * Returns format for video frame.
+	 * @return format for video frame.
+	 */
+	public AVPixelFormat getPixelFormat()
+	{
+		final long pixelFormatLong = getPixelFormatNative(pointer);
+		return AVUtilHelper.longToAVPixelFormat(pixelFormatLong);
+	}
+
+	/**
+	 * Returns format for audio frame.
+	 * @return format for audio frame.
+	 */
+	public AVSampleFormat getSampleFormat()
+	{
+		final long sampleFormatLong = getSampleFormatNative(pointer);
+		return AVUtilHelper.longToAVSampleFormat(sampleFormatLong);
+	}
+
+	/**
+	 * Returns whether frame is key frame.
+	 * @return whether frame is key frame.
+	 */
+	public boolean isKeyFrame()
+	{
+		return getKeyFrameNative(pointer) == 1;
+	}
+	/**
+	 * Returns picture type of the frame.
+	 * @return picture type of the frame.
+	 */
+	public AVPictureType getPictureType()
+	{
+		final long pictureTypeLong = getPictureTypeNative(pointer);
+		return AVUtilHelper.longToAVPictureType(pictureTypeLong);
 	}
 
 	//endregion
@@ -89,6 +206,14 @@ public class AVFrame extends CStructWrapper
 	private static native long createNative();
 	private static native void freeNative(long pointer);
 	private static native ByteBuffer getDataNative(long pointer, int planeIndex);
+	private static native int getLineSizeNative(long pointer, int planeIndex);
+	private static native int getWidthNative(long pointer);
+	private static native int getHeightNative(long pointer);
+	private static native int getNumberOfSamplesNative(long pointer);
+	private static native long getPixelFormatNative(long pointer);
+	private static native long getSampleFormatNative(long pointer);
+	private static native int getKeyFrameNative(long pointer);
+	private static native long getPictureTypeNative(long pointer);
 
 	//endregion
 }

@@ -18,6 +18,7 @@ public class AVUtilHelper
 	private static ArrayList<IndexMap<AVChromaLocation>> chromaLocationMap;
 	private static ArrayList<IndexMap<AVPictureType>> pictureTypeMap;
 	private static ArrayList<IndexMap<AVFrameSideDataType>> frameSideDataTypeMap;
+	private static ArrayList<IndexMap<AVSampleFormat>> sampleFormatMap;
 
 	static {
 		classCategoryMap = new ArrayList<>();
@@ -351,6 +352,21 @@ public class AVUtilHelper
 		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_S12M_TIMECODE, 19));
 		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_DYNAMIC_HDR_PLUS, 20));
 		frameSideDataTypeMap.add(new IndexMap<>(AVFrameSideDataType.AV_FRAME_DATA_REGIONS_OF_INTEREST, 21));
+
+		sampleFormatMap = new ArrayList<>();
+		sampleFormatMap.add(new IndexMap<>(AVSampleFormat.AV_SAMPLE_FMT_NONE, 1));
+		sampleFormatMap.add(new IndexMap<>(AVSampleFormat.AV_SAMPLE_FMT_U8, 2));
+		sampleFormatMap.add(new IndexMap<>(AVSampleFormat.AV_SAMPLE_FMT_S16, 3));
+		sampleFormatMap.add(new IndexMap<>(AVSampleFormat.AV_SAMPLE_FMT_S32, 4));
+		sampleFormatMap.add(new IndexMap<>(AVSampleFormat.AV_SAMPLE_FMT_FLT, 5));
+		sampleFormatMap.add(new IndexMap<>(AVSampleFormat.AV_SAMPLE_FMT_DBL, 6));
+		sampleFormatMap.add(new IndexMap<>(AVSampleFormat.AV_SAMPLE_FMT_U8P, 7));
+		sampleFormatMap.add(new IndexMap<>(AVSampleFormat.AV_SAMPLE_FMT_S16P, 8));
+		sampleFormatMap.add(new IndexMap<>(AVSampleFormat.AV_SAMPLE_FMT_S32P, 9));
+		sampleFormatMap.add(new IndexMap<>(AVSampleFormat.AV_SAMPLE_FMT_FLTP, 10));
+		sampleFormatMap.add(new IndexMap<>(AVSampleFormat.AV_SAMPLE_FMT_DBLP, 11));
+		sampleFormatMap.add(new IndexMap<>(AVSampleFormat.AV_SAMPLE_FMT_S64, 12));
+		sampleFormatMap.add(new IndexMap<>(AVSampleFormat.AV_SAMPLE_FMT_S64P, 13));
 	}
 
 
@@ -481,5 +497,16 @@ public class AVUtilHelper
 	public static AVFrameSideDataType longToAVFrameSideDataType(long value)
 	{
 		return IndexMap.getValueByIndex(frameSideDataTypeMap, value);
+	}
+
+
+	public static long AVSampleFormatToLong(AVSampleFormat sampleFormat)
+	{
+		return IndexMap.getIndexByValue(AVUtilHelper.sampleFormatMap, sampleFormat);
+	}
+
+	public static AVSampleFormat longToAVSampleFormat(long value)
+	{
+		return IndexMap.getValueByIndex(sampleFormatMap, value);
 	}
 }

@@ -68,4 +68,7 @@ AVPictureType longToAVPictureType(long index);
 long AVFrameSideDataTypeToLong(AVFrameSideDataType frameSideDataType);
 AVFrameSideDataType longToAVFrameSideDataType(long index);
 
+long AVSampleFormatToLong(AVSampleFormat sampleFormat);
+AVSampleFormat longToAVSampleFormat(long index);
+
 #endif //HELLOFFMPEG_AVUTIL_HELPER_HPP

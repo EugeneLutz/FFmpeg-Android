@@ -3,6 +3,7 @@ package com.eugene_lutz.ffmpeg_android.avutil;
 public enum AVSampleFormat
 {
 	AV_SAMPLE_FMT_NONE,
+
 	///< unsigned 8 bits
 	AV_SAMPLE_FMT_U8,
 
@@ -37,8 +38,5 @@ public enum AVSampleFormat
 	AV_SAMPLE_FMT_S64,
 
 	///< signed 64 bits, planar
-	AV_SAMPLE_FMT_S64P,
-
-	///< Number of sample formats. DO NOT USE if linking dynamically
-	AV_SAMPLE_FMT_NB
+	AV_SAMPLE_FMT_S64P
 }

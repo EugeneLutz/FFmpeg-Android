@@ -608,4 +608,48 @@ AVFrameSideDataType longToAVFrameSideDataType(long value)
     return IndexMap<AVFrameSideDataType>::GetValueByIndex(frameSideDataTypeMap, value);
 }
 
+
+
+static std::vector<IndexMap<AVSampleFormat>> sampleFormatMap;
+static bool _sampleFormatInitialized = false;
+static void initializesampleFormatMap()
+{
+    sampleFormatMap.clear();
+    sampleFormatMap.emplace_back(AV_SAMPLE_FMT_NONE, 1);
+    sampleFormatMap.emplace_back(AV_SAMPLE_FMT_U8, 2);
+    sampleFormatMap.emplace_back(AV_SAMPLE_FMT_S16, 3);
+    sampleFormatMap.emplace_back(AV_SAMPLE_FMT_S32, 4);
+    sampleFormatMap.emplace_back(AV_SAMPLE_FMT_FLT, 5);
+    sampleFormatMap.emplace_back(AV_SAMPLE_FMT_DBL, 6);
+    sampleFormatMap.emplace_back(AV_SAMPLE_FMT_U8P, 7);
+    sampleFormatMap.emplace_back(AV_SAMPLE_FMT_S16P, 8);
+    sampleFormatMap.emplace_back(AV_SAMPLE_FMT_S32P, 9);
+    sampleFormatMap.emplace_back(AV_SAMPLE_FMT_FLTP, 10);
+    sampleFormatMap.emplace_back(AV_SAMPLE_FMT_DBLP, 11);
+    sampleFormatMap.emplace_back(AV_SAMPLE_FMT_S64, 12);
+    sampleFormatMap.emplace_back(AV_SAMPLE_FMT_S64P, 13);
+
+    _sampleFormatInitialized = true;
+}
+
+long AVSampleFormatToLong(AVSampleFormat sampleFormat)
+{
+    if (!_sampleFormatInitialized)
+    {
+        initializesampleFormatMap();
+    }
+
+    return IndexMap<AVSampleFormat>::GetIndexByValue(sampleFormatMap, sampleFormat);
+}
+
+AVSampleFormat longToAVSampleFormat(long value)
+{
+    if (!_sampleFormatInitialized)
+    {
+        initializesampleFormatMap();
+    }
+
+    return IndexMap<AVSampleFormat>::GetValueByIndex(sampleFormatMap, value);
+}
+
 #pragma clang diagnostic pop
