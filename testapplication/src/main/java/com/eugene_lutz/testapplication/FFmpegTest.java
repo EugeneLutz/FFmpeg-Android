@@ -91,7 +91,7 @@ public class FFmpegTest
 		AVDictionary imported = AVDictionary.create();
 		final ExecuteResult executeResult = new ExecuteResult();
 		final String exportString = dictionary.getString(':', ';', executeResult);
-		imported.parseString(exportString, ":", ";", AVDictionary.AV_DICT_MULTIKEY);
+		imported.parseString(exportString, ':', ';', AVDictionary.AV_DICT_MULTIKEY);
 		dumpAVDictionary(imported);
 
 		AVDictionary copyDictionary = AVDictionary.create();

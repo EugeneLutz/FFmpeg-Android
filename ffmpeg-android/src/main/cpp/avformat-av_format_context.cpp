@@ -100,13 +100,6 @@ void openInput(JNIEnv* env, const char* path, jobject result)
     _fillOpenResult(env, result, true, 0, avFormatContext);
 }
 
-/*
- * TODO: Create class EnvString:
- * EnvString(jstring);
- * virtual const char* operator = ();
- *
- * */
-
 JNI_FUNCTION(void, avformat_AVFormatContext, openInputNative)(JNIEnv* env, jclass, jstring filePath, jobject result)
 {
     /*struct ResultInfo

@@ -11,26 +11,21 @@ public class TemplateCStructWraper extends CStructWrapper
 
 	//region Constructor, Destructor, etc...
 
-	public TemplateCStructWraper(long pointer, AllocationType allocationType, int allocationFlag)
+	private TemplateCStructWraper(long pointer, AllocationType allocationType, int allocationFlag)
 	{
 		super(pointer, allocationType, allocationFlag);
 	}
 
 	@Override
-	protected void finalize() /*throws Throwable*/
+	protected void finalizeDefault()
 	{
-		switch (allocationType)
-		{
-			case FROM_INSTANCE: break;
-			case ALLOC: break;
-			case CUSTOM: customFinalize(); break;
-			default: break;
-		}
+		//
 	}
 
-	private void customFinalize()
+	@Override
+	protected void finalizeCustom(int flag)
 	{
-		switch (customFlag)
+		switch (flag)
 		{
 			case 0: break;
 			case 1: break;
@@ -38,12 +33,12 @@ public class TemplateCStructWraper extends CStructWrapper
 		}
 	}
 
-	public static TemplateCStructWraper from(long pointer)
+	private static TemplateCStructWraper from(long pointer)
 	{
 		return from(pointer, AllocationType.FROM_INSTANCE, 0);
 	}
 
-	public static TemplateCStructWraper from(long pointer, AllocationType allocationType, int allocationFlag)
+	private static TemplateCStructWraper from(long pointer, AllocationType allocationType, int allocationFlag)
 	{
 		return pointer == 0 ? null : new TemplateCStructWraper(pointer, allocationType, allocationFlag);
 	}

@@ -8,6 +8,11 @@ public final class ExecuteResult
 
 	public ExecuteResult()
 	{
+		reset();
+	}
+
+	public void reset()
+	{
 		succeeded = true;
 		code = 0;
 		message = null;

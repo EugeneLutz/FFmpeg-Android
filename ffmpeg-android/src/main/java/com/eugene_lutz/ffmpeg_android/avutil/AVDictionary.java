@@ -37,10 +37,15 @@ public class AVDictionary extends CStructWrapper
 
 	//region Constructor, Destructor, etc...
 
-	public AVDictionary(long pointer, AllocationType allocationType, int allocationFlag)
+	public AVDictionary()
+	{
+		super(0, AllocationType.ALLOC, 0);
+	}
+
+	/*private AVDictionary(long pointer, AllocationType allocationType, int allocationFlag)
 	{
 		super(pointer, allocationType, allocationFlag);
-	}
+	}*/
 
 	@Override
 	protected void finalizeDefault()
@@ -48,15 +53,15 @@ public class AVDictionary extends CStructWrapper
 		freeNative(pointer);
 	}
 
-	public static AVDictionary from(long pointer)
+	/*private static AVDictionary from(long pointer)
 	{
 		return from(pointer, AllocationType.FROM_INSTANCE, 0);
 	}
 
-	public static AVDictionary from(long pointer, AllocationType allocationType, int allocationFlag)
+	private static AVDictionary from(long pointer, AllocationType allocationType, int allocationFlag)
 	{
 		return pointer == 0 ? null : new AVDictionary(pointer, allocationType, allocationFlag);
-	}
+	}*/
 
 	//endregion
 
@@ -66,7 +71,7 @@ public class AVDictionary extends CStructWrapper
 
 	public static AVDictionary create()
 	{
-		return new AVDictionary(0, AllocationType.ALLOC, 0);
+		return new AVDictionary();
 	}
 
 	//endregion
@@ -84,11 +89,11 @@ public class AVDictionary extends CStructWrapper
 	 * To iterate through all the dictionary entries, you can set the matching key
 	 * to the null string "" and set the AV_DICT_IGNORE_SUFFIX flag.
 	 *
-	 * @param prev Set to the previous matching element to find the next.
-	 *             If set to null the first matching element is returned.
-	 * @param key matching key
-	 * @param flags a collection of AV_DICT_* flags controlling how the entry is retrieved
-	 * @return found entry or null in case no matching entry was found in the dictionary
+	 * @param key   matching key.
+	 * @param prev  set to the previous matching element to find the next.
+	 *                 If set to null the first matching element is returned.
+	 * @param flags a collection of AV_DICT_* flags controlling how the entry is retrieved.
+	 * @return      found entry or null in case no matching entry was found in the dictionary.
 	 */
 	public AVDictionaryEntry get(String key, AVDictionaryEntry prev, int flags)
 	{
@@ -98,9 +103,24 @@ public class AVDictionary extends CStructWrapper
 	}
 
 	/**
+	 * Get a dictionary entry with matching key and matching case.
+	 *
+	 * The returned entry key or value must not be changed, or it will
+	 * cause undefined behavior.
+	 *
+	 * @param key matching key.
+	 * @return    found entry or null in case no matching entry was found in the dictionary.
+	 */
+	public AVDictionaryEntry get(String key)
+	{
+		final long entry = getNative(pointer, key, 0, AV_DICT_MATCH_CASE);
+		return AVDictionaryEntry.from(entry);
+	}
+
+	/**
 	 * Get number of entries in dictionary.
 	 *
-	 * @return number of entries in dictionary
+	 * @return number of entries in dictionary.
 	 */
 	public int count()
 	{
@@ -116,6 +136,7 @@ public class AVDictionary extends CStructWrapper
 	 * @param key entry key to add.
 	 * @param value entry value to add.
 	 *        Passing a null value will cause an existing entry to be deleted.
+	 * @param flags combination of AVDictionary.AV_DICT_* flags, 0 if not needed.
 	 * @return {@literal >}= 0 on success otherwise an error code {@literal <}0
 	 */
 	public int set(String key, String value, int flags)
@@ -124,10 +145,29 @@ public class AVDictionary extends CStructWrapper
 	}
 
 	/**
-	 * Convenience wrapper for av_dict_set that converts the value to a string
+	 * Set the given entry, overwriting an existing entry.
+	 *
+	 * Warning: Adding a new entry to a dictionary invalidates all existing entries
+	 * previously returned with AVDictionary.get(...).
+	 *
+	 * @param key entry key to add.
+	 * @param value entry value to add.
+	 *        Passing a null value will cause an existing entry to be deleted.
+	 * @return {@literal >}= 0 on success otherwise an error code {@literal <}0
+	 */
+	public int set(String key, String value)
+	{
+		return set(key, value, 0);
+	}
+
+	/**
+	 * Convenience wrapper for AVDictionary.set that converts the value to a string
 	 * and stores it.
 	 *
-	 * Note: If AV_DICT_DONT_STRDUP_KEY is set, key will be freed on error.
+	 * @param key entry key to add.
+	 * @param value entry value to add.
+	 * @param flags combination of AVDictionary.AV_DICT_* flags, 0 if not needed.
+	 * @return {@literal >}= 0 on success otherwise an error code {@literal <}0
 	 */
 	public int setInt(String key, long value, int flags)
 	{
@@ -135,51 +175,64 @@ public class AVDictionary extends CStructWrapper
 	}
 
 	/**
+	 * Convenience wrapper for AVDictionary.set that converts the value to a string
+	 * and stores it.
+	 *
+	 * @param key   entry key to add.
+	 * @param value entry value to add.
+	 * @return      {@literal >}= 0 on success otherwise an error code {@literal <}0.
+	 */
+	public int setInt(String key, long value)
+	{
+		return setIntNative(key, value, 0);
+	}
+
+	/**
 	 * Parse the key/value pairs list and add the parsed entries to a dictionary.
 	 *
 	 * In case of failure, all the successfully set entries are stored in
-	 * *pm. You may need to manually free the created dictionary.
+	 * this dictionary. You may need to manually free the created dictionary.
 	 *
-	 * @param keyValSep  a string of characters used to separate
-	 *                     key from value
-	 * @param pairsSep    a string of characters used to separate
-	 *                     two pairs from each other
-	 * @param flags        flags to use when adding to dictionary.
-	 * @return             0 on success, negative AVERROR code on failure
+	 * @param keyValSep character used to separate key from value.
+	 * @param pairSep   character used to separate two pairs from each other.
+	 * @param flags     flags to use when adding to dictionary.
+	 * @return          0 on success, negative AVERROR code on failure.
 	 */
-	public int parseString(String str, String keyValSep, String pairsSep, int flags)
+	public int parseString(String str, char keyValSep, char pairSep, int flags)
 	{
-		return parseStringNative(str, keyValSep, pairsSep, flags);
+		return parseStringNative(str, keyValSep, pairSep, flags);
 	}
 
 	/**
 	 * Copy entries from source AVDictionary struct into this dictionary.
-	 * @param source pointer to source AVDictionary struct
-	 * @param flags flags to use when setting entries in this object
-	 * note: metadata is read using the AV_DICT_IGNORE_SUFFIX flag
+	 *
+	 * @param source pointer to source AVDictionary struct.
+	 * @param flags flags to use when setting entries in this object. Note:
+	 *                 metadata is read using the AV_DICT_IGNORE_SUFFIX flag.
 	 * @return 0 on success, negative AVERROR code on failure. If dst was allocated
 	 *           by this function, callers should free the associated memory.
 	 */
 	public int copyFrom(AVDictionary source, int flags)
 	{
-		return copyNative(source.pointer, flags);
+		return copyNative(source == null ? 0 : source.pointer, flags);
 	}
 
 	/**
 	 * Get dictionary entries as a string.
 	 *
 	 * Create a string containing dictionary's entries.
-	 * Such string may be passed back to av_dict_parse_string().
+	 * Such string may be passed back to parseString(...).
 	 * Note: String is escaped with backslashes ('\').
 	 * Warning: Separators cannot be neither '\\' nor '\0'. They also cannot be the same.
 	 *
-	 * @param  keyValSep   character used to separate key from value
-	 * @param  pairsSep     character used to separate two pairs from each other
-	 * @return                   {@literal >}= 0 on success, negative on error
+	 * @param keyValSep character used to separate key from value.
+	 * @param pairSep   character used to separate two pairs from each other.
+	 * @param result    execution result of this method.
+	 * @return          {@literal >}= 0 on success, negative on error.
 	 */
-	public String getString(char keyValSep, char pairsSep, ExecuteResult result)
+	public String getString(char keyValSep, char pairSep, ExecuteResult result)
 	{
-		return getStringNative(pointer, keyValSep, pairsSep, result);
+		return getStringNative(pointer, keyValSep, pairSep, result);
 	}
 
 	//endregion
@@ -198,7 +251,7 @@ public class AVDictionary extends CStructWrapper
 	private static native int countNative(long pointer);
 	private native int setNative(String key, String value, int flags);
 	private native int setIntNative(String key, long value, int flags);
-	private native int parseStringNative(String str, String keyValSep, String pairsSep, int flags);
+	private native int parseStringNative(String str, char keyValSep, char pairsSep, int flags);
 	private native int copyNative(long src, int flags);
 	private static native void freeNative(long pointer);
 	private static native String getStringNative(long pointer, char keyValSep, char pairsSep, ExecuteResult result);

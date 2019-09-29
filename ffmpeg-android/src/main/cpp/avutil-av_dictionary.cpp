@@ -83,18 +83,17 @@ JNI_FUNCTION(jint, avutil_AVDictionary, setIntNative)(JNIEnv* env,
 
 
 JNI_FUNCTION(jint, avutil_AVDictionary, parseStringNative)(JNIEnv* env,
-        jobject obj, jstring str, jstring keyValSep, jstring pairsSep, jint flags)
+        jobject obj, jstring jstr, jchar jkeyValSep, jchar jpairSep, jint flags)
 {
     auto wrapper = CStructWrapper(obj, env);
-    auto strString = JNIString(str, env);
-    auto keyValSepString = JNIString(keyValSep, env);
-    auto pairsSepString = JNIString(pairsSep, env);
+    auto str = JNIString(jstr, env);
+    char keyValSep[] = { tochar(jkeyValSep) };//JNIString(jkeyValSep, env);
+    char pairSep[] = { tochar(jpairSep) };//JNIString(jpairsSep, env);
     auto flagsInt = toint(flags);
 
     auto pointer = wrapper.getPointer();
     auto dictionary = getDictionary(pointer);
-    auto result = av_dict_parse_string(&dictionary, strString.getData(),
-            keyValSepString.getData(), pairsSepString.getData(), flagsInt);
+    auto result = av_dict_parse_string(&dictionary, str.getData(), keyValSep, pairSep, flagsInt);
     wrapper.setPointer(dictionary);
 
     return tojint(result);
@@ -103,6 +102,11 @@ JNI_FUNCTION(jint, avutil_AVDictionary, parseStringNative)(JNIEnv* env,
 
 JNI_FUNCTION(jint, avutil_AVDictionary, copyNative)(JNIEnv* env, jobject obj, jlong src, jint flags)
 {
+    if (src == 0)
+    {
+        return tojint(0);
+    }
+
     auto wrapper = CStructWrapper(obj, env);
     auto dstDict = getDictionary(wrapper.getPointer());
     auto srcDict = getDictionary(src);
