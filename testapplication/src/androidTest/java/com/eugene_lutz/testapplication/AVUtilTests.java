@@ -8,6 +8,7 @@ import com.eugene_lutz.ffmpeg_android.avcodec.AVCodecContext;
 import com.eugene_lutz.ffmpeg_android.avcodec.AVCodecID;
 import com.eugene_lutz.ffmpeg_android.avdevice.AVDevice;
 import com.eugene_lutz.ffmpeg_android.avutil.AVMediaType;
+import com.eugene_lutz.ffmpeg_android.avutil.AVRational;
 import com.eugene_lutz.ffmpeg_android.avutil.AVUtil;
 
 import org.junit.Test;
@@ -41,6 +42,18 @@ public class AVUtilTests
 
 			assertNotNull(mediaTypeString);
 			Log.d(TAG, String.format("%s: %s", mediaType.toString(), mediaTypeString));
+		}
+	}
+
+	@Test
+	public void testGetBaseTimeQ() throws Exception
+	{
+		try (final AVRational baseTimeQ = AVUtil.getBaseTimeQ())
+		{
+			assertNotNull(baseTimeQ);
+			final int num = baseTimeQ.getNumerator();
+			final int den = baseTimeQ.getDenominator();
+			Log.d(TAG, String.format("%d : %d", num, den));
 		}
 	}
 }

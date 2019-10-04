@@ -1,5 +1,6 @@
 package com.eugene_lutz.ffmpeg_android.avutil;
 
+import com.eugene_lutz.ffmpeg_android.CStructWrapper;
 import com.eugene_lutz.ffmpeg_android.FFmpegAndroid;
 
 public final class AVUtil
@@ -56,9 +57,20 @@ public final class AVUtil
 		return getMediaTypeStringNative(mediaTypeIndex);
 	}
 
+	/**
+	 * Returns the fractional representation of the internal time base.
+	 * @return the fractional representation of the internal time base.
+	 */
+	public static AVRational getBaseTimeQ()
+	{
+		final long rationalPointer = getBaseTimeQNative();
+		return AVRational.from(rationalPointer, CStructWrapper.AllocationType.ALLOC);
+	}
+
 	private static native long getVersionNative();
 	private static native String getVersionInfoNative();
 	private static native String getConfigurationNative();
 	private static native String getLicenseNative();
 	private static native String getMediaTypeStringNative(long index);
+	private static native long getBaseTimeQNative();
 }

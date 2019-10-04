@@ -39,3 +39,10 @@ JNI_FUNCTION(jstring, avutil_AVUtil, getMediaTypeStringNative)(JNIEnv* env, jcla
     auto string = av_get_media_type_string(mediaType);
     return env->NewStringUTF(string);
 }
+
+JNI_FUNCTION(jlong, avutil_AVUtil, getBaseTimeQNative)(JNIEnv*, jclass)
+{
+    auto rational = new AVRational();
+    *rational = av_get_time_base_q();
+    return asjlong(rational);
+}
